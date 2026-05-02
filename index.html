@@ -27,13 +27,6 @@
     }
     html, body { height: 100%; background: var(--bg); color: var(--beige); font-family: 'Poppins', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    /* LOADING */
-    #loading { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; transition: opacity 0.7s ease; }
-    #loading.out { opacity: 0; pointer-events: none; }
-    #loading svg { width: 180px; opacity: 0.9; }
-    .lbar-track { width: 120px; height: 1px; background: var(--beige-ultra); border-radius: 99px; overflow: hidden; }
-    .lbar-fill { height: 100%; width: 0%; background: rgba(224,220,211,0.3); border-radius: 99px; transition: width 0.2s ease-out; }
-    .ltext { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--beige-faint); }
 
     /* APP */
     #app { opacity: 0; transition: opacity 0.5s ease; }
@@ -203,26 +196,6 @@
   </style>
 </head>
 <body>
-
-<div id="loading">
-  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
-    <style>.lc{fill:#e0dcd3}</style>
-    <rect class="lc" x="149.47" y="147.26" width="4.68" height="105.47"/>
-    <path class="lc" d="m240.07,162v7.64h-19.61v64.31h-9.39v-64.31h-19.72v-7.64h48.72Z"/>
-    <path class="lc" d="m265.98,229.97c-5.51-3.13-9.86-7.5-13.06-13.11-3.2-5.61-4.8-11.92-4.8-18.94s1.6-13.33,4.8-18.94c3.2-5.61,7.55-9.98,13.06-13.11,5.5-3.13,11.6-4.7,18.27-4.7s12.87,1.57,18.37,4.7c5.51,3.13,9.84,7.48,13.01,13.06,3.16,5.57,4.75,11.91,4.75,18.99s-1.59,13.42-4.75,18.99c-3.17,5.57-7.5,9.93-13.01,13.06-5.51,3.13-11.63,4.7-18.37,4.7s-12.77-1.56-18.27-4.7Zm31.84-6.97c4.03-2.34,7.19-5.68,9.5-10.01,2.31-4.34,3.46-9.36,3.46-15.07s-1.15-10.82-3.46-15.12c-2.31-4.3-5.45-7.62-9.45-9.96-3.99-2.34-8.53-3.51-13.62-3.51s-9.64,1.17-13.63,3.51c-3.99,2.34-7.14,5.66-9.45,9.96-2.31,4.3-3.46,9.34-3.46,15.12s1.15,10.74,3.46,15.07c2.31,4.34,5.47,7.67,9.5,10.01,4.03,2.34,8.55,3.51,13.58,3.51s9.55-1.17,13.57-3.51Z"/>
-    <path class="lc" d="m334.01,178.98c3.16-5.61,7.49-9.99,12.96-13.16,5.47-3.16,11.54-4.75,18.22-4.75,7.85,0,14.69,1.89,20.54,5.68,5.85,3.79,10.12,9.15,12.8,16.1h-11.25c-2-4.34-4.87-7.67-8.62-10.01-3.75-2.34-8.24-3.51-13.47-3.51s-9.53,1.17-13.52,3.51c-3.99,2.34-7.12,5.66-9.39,9.96-2.27,4.3-3.41,9.34-3.41,15.12s1.14,10.72,3.41,15.02c2.27,4.3,5.4,7.62,9.39,9.96,3.99,2.34,8.5,3.51,13.52,3.51s9.72-1.15,13.47-3.46c3.75-2.3,6.62-5.63,8.62-9.96h11.25c-2.68,6.88-6.95,12.2-12.8,15.95-5.85,3.75-12.7,5.63-20.54,5.63-6.68,0-12.75-1.57-18.22-4.7-5.47-3.13-9.79-7.48-12.96-13.06-3.16-5.57-4.75-11.87-4.75-18.89s1.59-13.33,4.75-18.94Z"/>
-    <path class="lc" d="m426.8,229.97c-5.51-3.13-9.86-7.5-13.06-13.11-3.2-5.61-4.8-11.92-4.8-18.94s1.6-13.33,4.8-18.94c3.2-5.61,7.55-9.98,13.06-13.11,5.5-3.13,11.6-4.7,18.27-4.7s12.87,1.57,18.37,4.7c5.51,3.13,9.84,7.48,13.01,13.06,3.16,5.57,4.75,11.91,4.75,18.99s-1.59,13.42-4.75,18.99c-3.17,5.57-7.5,9.93-13.01,13.06-5.51,3.13-11.63,4.7-18.37,4.7s-12.77-1.56-18.27-4.7Zm31.84-6.97c4.03-2.34,7.19-5.68,9.5-10.01,2.31-4.34,3.46-9.36,3.46-15.07s-1.15-10.82-3.46-15.12c-2.31-4.3-5.45-7.62-9.45-9.96-3.99-2.34-8.53-3.51-13.62-3.51s-9.64,1.17-13.63,3.51c-3.99,2.34-7.14,5.66-9.45,9.96-2.31,4.3-3.46,9.34-3.46,15.12s1.15,10.74,3.46,15.07c2.31,4.34,5.47,7.67,9.5,10.01,4.03,2.34,8.55,3.51,13.58,3.51s9.55-1.17,13.57-3.51Z"/>
-    <path class="lc" d="m568.95,162.2v71.74h-11.77v-49.14l-21.89,49.14h-8.15l-21.99-49.14v49.14h-11.77v-71.74h12.7l25.19,56.26,25.08-56.26h12.59Z"/>
-    <path class="lc" d="m612.71,176.35l-20.23,57.6h-12.28l25.71-71.85h13.62l25.71,71.85h-12.39l-20.13-57.6Z"/>
-    <path class="lc" d="m699.89,166.59c5.74,2.93,10.19,7.12,13.32,12.59,3.13,5.47,4.7,11.85,4.7,19.15s-1.57,13.63-4.7,18.99c-3.13,5.37-7.57,9.48-13.32,12.34-5.75,2.86-12.44,4.28-20.08,4.28h-23.43v-71.74h23.43c7.64,0,14.33,1.46,20.08,4.39Zm-.78,50.94c4.47-4.54,6.71-10.94,6.71-19.2s-2.24-14.83-6.71-19.51c-4.47-4.68-10.91-7.02-19.3-7.02h-11.67v52.54h11.67c8.4,0,14.83-2.27,19.3-6.81Z"/>
-    <path class="lc" d="m741.33,171.7v24.03h24.79l.04,9.39h-24.77l-.05,19.23h27.87v9.6h-39.64v-71.85h39.64v9.6h-27.87Z"/>
-    <path class="lc" d="m877.18,176.35l-20.23,57.6h-12.28l25.71-71.85h13.62l25.71,71.85h-12.39l-20.13-57.6Z"/>
-    <g><path class="lc" d="m834.95,233.95h-14.04l-16.51-28.71h-20.73v-9.48l24.77.09c4.41,0,7.72-1.09,9.94-3.31,2.25-2.19,3.38-5.16,3.38-8.88s-1.09-6.6-3.32-8.69c-2.19-2.13-5.54-3.17-10.01-3.17h-24.77v-9.59h24.77c5.5,0,10.16.97,13.98,2.88,3.82,1.94,6.69,4.5,8.57,7.76,1.91,3.22,2.85,6.85,2.85,10.82,0,4.69-1.38,8.94-4.06,12.76-2.72,3.82-6.91,6.41-12.57,7.79l17.76,29.74Z"/><path class="lc" d="m783.63,181.57v4.4s15.46,0,15.46,0c1.21,0,2.21-.98,2.21-2.19,0-1.21-1-2.21-2.21-2.21h-15.46Z"/></g>
-    <g><path class="lc" d="m90.3,233.84h14.04s16.51-28.71,16.51-28.71h20.73s0-9.48,0-9.48l-24.77.09c-4.41,0-7.72-1.09-9.94-3.31-2.25-2.19-3.38-5.16-3.38-8.88,0-3.69,1.09-6.6,3.32-8.69,2.19-2.13,5.54-3.17,10.01-3.17h24.77s0-9.59,0-9.59h-24.77c-5.5,0-10.16.97-13.98,2.88-3.82,1.94-6.69,4.5-8.57,7.76-1.91,3.22-2.85,6.85-2.85,10.82,0,4.69,1.38,8.94,4.06,12.76,2.72,3.82,6.91,6.41,12.57,7.79l-17.76,29.74Z"/><path class="lc" d="m141.62,181.47v4.4h-15.46c-1.21,0-2.21-.98-2.21-2.19s1-2.21,2.21-2.21h15.46Z"/></g>
-  </svg>
-  <div class="lbar-track"><div class="lbar-fill" id="lb"></div></div>
-  <span class="ltext">Cargando modelo 3D</span>
-</div>
 
 <!-- BIENVENIDA -->
 <div id="welcome">
@@ -432,9 +405,6 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
-const bar = document.getElementById('lb');
-let fp = 5;
-const fi = setInterval(() => { fp = Math.min(fp + Math.random()*8+2, 88); bar.style.width = fp+'%'; }, 150);
 
 // Bienvenida
 const wel = document.getElementById('welcome');
@@ -566,11 +536,11 @@ loader.load('models/kitchen.glb', (gltf) => {
 
   setTimeout(() => {
     document.getElementById('loading').classList.add('out');
-    setTimeout(() => { document.getElementById('loading').style.display='none'; document.getElementById('app').classList.add('on'); }, 750);
+    setTimeout(() => { document.getElementById('loading').style.display='none'; }, 750);
   }, 300);
 
-}, (xhr) => { if (xhr.total) bar.style.width = Math.min(xhr.loaded/xhr.total*88,88)+'%'; },
-(err) => { console.error(err); clearInterval(fi); document.getElementById('loading').classList.add('out'); setTimeout(()=>{ document.getElementById('loading').style.display='none'; document.getElementById('app').classList.add('on'); },750); });
+},  null,
+(err) => { console.error(err); clearInterval(fi); document.getElementById('loading').classList.add('out'); setTimeout(()=>{ document.getElementById('loading').style.display='none'; },750); });
 
 // Interacción — ocultar hints al primer toque
 let hasInteracted = false;
@@ -699,230 +669,6 @@ function updateHS() {
   });
 }
 
-document.getElementById('btn-hs').addEventListener('click',()=>{ hsVis=!hsVis; document.getElementById('tdot').classList.toggle('on',hsVis); });
-
-// Loop
-const clock=new THREE.Clock();
-function animate() {
-  requestAnimationFrame(animate);
-  clock.getDelta();
-  controls.update();
-  renderer.render(scene,camera);
-  updateHS();
-}
-animate();
-
-const canvas = document.getElementById('cv');
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 0.9;
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-const scene = new THREE.Scene();
-scene.background = new THREE.Color('#1a1613');
-scene.fog = new THREE.FogExp2('#1a1613', 0.022);
-
-const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 300);
-
-function resize() {
-  const c = document.getElementById('cc');
-  const w = c.clientWidth, h = c.clientHeight;
-  renderer.setSize(w, h, false);
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-}
-resize();
-window.addEventListener('resize', resize);
-
-// OrbitControls — sin pan para no confundir en mobile
-const controls = new OrbitControls(camera, canvas);
-controls.enableDamping = true; controls.dampingFactor = 0.07;
-controls.enablePan = false;
-controls.rotateSpeed = 0.5; controls.zoomSpeed = 0.5;
-controls.minPolarAngle = Math.PI/6; controls.maxPolarAngle = Math.PI/2.05;
-
-// Scroll: solo capturar wheel cuando el mouse está sobre el canvas
-let overCanvas = false;
-canvas.addEventListener('mouseenter', () => overCanvas = true);
-canvas.addEventListener('mouseleave', () => overCanvas = false);
-// Prevenir que OrbitControls capture el scroll de la página
-canvas.addEventListener('wheel', (e) => { if (!overCanvas) e.stopImmediatePropagation(); }, { passive: true });
-
-// Lights
-scene.add(new THREE.AmbientLight('#c8b8a8', 0.45));
-const key = new THREE.DirectionalLight('#fff5e8', 1.6);
-key.position.set(8, 12, 8); key.castShadow = true;
-key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -0.0005;
-scene.add(key);
-const fill = new THREE.DirectionalLight('#d0e0f0', 0.25); fill.position.set(-6,6,-4); scene.add(fill);
-const rim = new THREE.DirectionalLight('#f0e0d0', 0.18); rim.position.set(-2,5,-8); scene.add(rim);
-
-const ground = new THREE.Mesh(new THREE.CircleGeometry(25,64), new THREE.ShadowMaterial({ opacity: 0.2 }));
-ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
-
-let modelGroup=null, box3=null, center3=new THREE.Vector3(), initPos=null, initTgt=null;
-
-const loader = new GLTFLoader();
-const draco = new DRACOLoader();
-draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
-loader.setDRACOLoader(draco);
-
-loader.load('models/kitchen.glb', (gltf) => {
-  clearInterval(fi); bar.style.width = '100%';
-  const model = gltf.scene;
-
-  model.traverse(child => {
-    if (!child.isMesh) return;
-    const bb = new THREE.Box3().setFromObject(child);
-    const sz = bb.getSize(new THREE.Vector3());
-    if ((sz.y < 0.05 && sz.x > 1 && sz.z > 1) || /floor|ground|piso|suelo|plane/i.test(child.name)) { child.visible = false; return; }
-    child.castShadow = true; child.receiveShadow = true;
-    const mats = Array.isArray(child.material) ? child.material : [child.material];
-    mats.forEach(m => { if (m?.isMeshStandardMaterial) { m.roughness = Math.max(m.roughness??0.5, 0.2); m.metalness = Math.min(m.metalness??0, 0.4); m.envMapIntensity = 0.5; } });
-  });
-
-  // Wrapper — NO hacemos rotación introductoria para evitar descentrado visual
-  const wrapper = new THREE.Group();
-  wrapper.add(model);
-  scene.add(wrapper);
-
-  // 1. Centrar modelo en origen (base en Y=0, centrado en XZ)
-  box3 = new THREE.Box3().setFromObject(wrapper);
-  const size = box3.getSize(new THREE.Vector3());
-  box3.getCenter(center3);
-  wrapper.position.set(-center3.x, -box3.min.y, -center3.z);
-
-  // 2. Recalcular bounding box en posición final
-  box3.setFromObject(wrapper);
-  box3.getCenter(center3);
-  modelGroup = wrapper;
-
-  // 3. Calcular cámara para que el modelo llene bien la pantalla
-  const maxDim = Math.max(size.x, size.y, size.z);
-  const fovR = camera.fov * Math.PI / 180;
-  // En mobile alejamos más para ver la cocina completa
-  const isMobile = window.innerWidth < 768;
-  const zoomFactor = isMobile ? 1.5 : 1.1;
-  const dist = (maxDim * zoomFactor) / (2 * Math.tan(fovR / 2));
-
-  controls.minDistance = dist * 0.2;
-  controls.maxDistance = dist * 4;
-
-  const tgt = new THREE.Vector3(0, center3.y * 0.4, 0);
-  const angle = -Math.PI * 0.6;
-  const pos = new THREE.Vector3(
-    dist * Math.sin(angle),
-    tgt.y + dist * 0.38,
-    dist * Math.cos(angle)
-  );
-
-  camera.position.copy(pos);
-  controls.target.copy(tgt);
-  controls.update();
-  initPos = pos.clone();
-  initTgt = tgt.clone();
-
-  ground.position.y = box3.min.y + 0.005;
-
-  // 4. Hotspots DESPUÉS de centrar (posiciones ya correctas)
-  positionHotspots(box3, size);
-
-  setTimeout(() => {
-    document.getElementById('loading').classList.add('out');
-    setTimeout(() => { document.getElementById('loading').style.display='none'; document.getElementById('app').classList.add('on'); }, 750);
-  }, 300);
-
-}, (xhr) => { if (xhr.total) bar.style.width = Math.min(xhr.loaded/xhr.total*88,88)+'%'; },
-(err) => { console.error(err); clearInterval(fi); document.getElementById('loading').classList.add('out'); setTimeout(()=>{ document.getElementById('loading').style.display='none'; document.getElementById('app').classList.add('on'); },750); });
-
-// Interacción
-let hasInteracted=false;
-canvas.addEventListener('pointerdown', () => {
-  if (!hasInteracted) {
-    hasInteracted=true;
-    const sd = document.getElementById('scroll-down');
-    if (sd) sd.classList.add('hidden');
-  }
-  if (tourActive) stopTour();
-});
-// Ocultar scroll-down al hacer scroll
-window.addEventListener('scroll', () => {
-  const sd = document.getElementById('scroll-down');
-  if (sd && window.scrollY > 20) sd.classList.add('hidden');
-}, { passive: true });
-
-// Reset
-document.getElementById('btn-reset').addEventListener('click', () => {
-  if (!initPos) return;
-  const sP=camera.position.clone(), sT=controls.target.clone(), dur=900, t0=Date.now();
-  function ar() { const t=Math.min((Date.now()-t0)/dur,1), e=1-Math.pow(1-t,3); camera.position.lerpVectors(sP,initPos,e); controls.target.lerpVectors(sT,initTgt,e); controls.update(); if(t<1) requestAnimationFrame(ar); }
-  ar();
-});
-
-// Tour — ángulos ajustados a la orientación real del modelo
-// angle base correcto es ~-0.6*PI (frente a la cocina)
-const BASE = -Math.PI * 0.6;
-const tourStops = [
-  // Vista general frontal — igual al ángulo inicial
-  { az: BASE,              pol: Math.PI/3.2,  d: 1.0,  t: "Vista general",      s: "Tu cocina completa en un vistazo" },
-  // Vista desde la derecha — módulos y mesada
-  { az: BASE + Math.PI/3,  pol: Math.PI/2.6,  d: 0.72, t: "Módulos y mesada",   s: "Melamina Sauco · Blend Faplac" },
-  // Vista desde la izquierda — lado de la isla
-  { az: BASE - Math.PI/3,  pol: Math.PI/3,    d: 0.7,  t: "Isla central",       s: "Superficie de trabajo y almacenamiento" },
-  // Vista aérea ligeramente — detalle superior
-  { az: BASE,              pol: Math.PI/5,    d: 0.8,  t: "Alacenas y detalles", s: "Herrajes Häfele · Iluminación LED" },
-];
-let tourActive=false, tourIdx=0, tourTimer=null;
-
-function doStop(idx) {
-  if (!initPos||!box3) return;
-  const s=tourStops[idx], cap=document.getElementById('tcap');
-  document.getElementById('tc-t').textContent=s.t;
-  document.getElementById('tc-s').textContent=s.s;
-  cap.classList.add('show');
-  const tgt=initTgt.clone(), bd=initPos.distanceTo(initTgt), d=bd*s.d;
-  const dest=new THREE.Vector3(tgt.x+d*Math.sin(s.az)*Math.sin(s.pol), tgt.y+d*Math.cos(s.pol), tgt.z+d*Math.cos(s.az)*Math.sin(s.pol));
-  const sP=camera.position.clone(), sT=controls.target.clone(), dur=1800, t0=Date.now();
-  function at() { if (!tourActive) return; const t=Math.min((Date.now()-t0)/dur,1), e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; camera.position.lerpVectors(sP,dest,e); controls.target.lerpVectors(sT,tgt,e); controls.update(); if(t<1) requestAnimationFrame(at); else if(tourActive) tourTimer=setTimeout(()=>{ cap.classList.remove('show'); setTimeout(()=>{ if(tourActive){tourIdx=(tourIdx+1)%tourStops.length;doStop(tourIdx);} },400); },3000); }
-  at();
-}
-function startTour() { tourActive=true; const b=document.getElementById('btn-tour'); b.classList.add('active'); b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>Pausar`; tourIdx=0; doStop(0); }
-function stopTour() { tourActive=false; clearTimeout(tourTimer); document.getElementById('tcap').classList.remove('show'); const b=document.getElementById('btn-tour'); b.classList.remove('active'); b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="5 3 19 12 5 21 5 3"/></svg>Tour`; }
-document.getElementById('btn-tour').addEventListener('click', ()=>tourActive?stopTour():startTour());
-
-// Hotspots — posiciones ajustadas a la geometría real del modelo
-// Vista correcta: isla al frente-centro, mesada/módulos al fondo, alacenas arriba-fondo
-const HDEFS=[
-  // Isla: frente-centro, altura media-baja
-  {rx:.5, ry:.25, rz:.75, l:'Isla central', d:'Superficie de trabajo con almacenamiento integrado'},
-  // Mesada/módulos bajos: fondo-izquierda, altura media
-  {rx:.25, ry:.35, rz:.25, l:'Melamina Sauco', d:'Línea Blend de Faplac · cantos ABS'},
-  // Alacenas: fondo, altura alta
-  {rx:.6,  ry:.75, rz:.2,  l:'Herrajes Häfele', d:'Bisagras de cierre suave premium'},
-];
-let hs3d=[], hsVis=true;
-function positionHotspots(box,size) {
-  const cont=document.getElementById('cc');
-  HDEFS.forEach(def=>{
-    const wp=new THREE.Vector3(box.min.x+size.x*def.rx, box.min.y+size.y*def.ry, box.min.z+size.z*def.rz);
-    const el=document.createElement('div'); el.className='hm';
-    el.innerHTML=`<div class="hd"></div><div class="hcard"><div class="hcard-t">${def.l}</div><div class="hcard-d">${def.d}</div></div>`;
-    el.addEventListener('click',(e)=>{e.stopPropagation();el.classList.toggle('active');});
-    cont.appendChild(el); hs3d.push({el,wp});
-  });
-}
-function updateHS() {
-  const cont=document.getElementById('cc'), w=cont.clientWidth, h=cont.clientHeight;
-  hs3d.forEach(({el,wp})=>{
-    if(!hsVis){el.style.display='none';return;}
-    const p=wp.clone().project(camera);
-    if(p.z>1){el.style.display='none';return;}
-    el.style.display=''; el.style.left=((p.x*.5+.5)*w)+'px'; el.style.top=((-p.y*.5+.5)*h)+'px';
-  });
-}
 document.getElementById('btn-hs').addEventListener('click',()=>{ hsVis=!hsVis; document.getElementById('tdot').classList.toggle('on',hsVis); });
 
 // Loop
