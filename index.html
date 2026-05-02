@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Proyecto Barzola · Toco Madera</title>
   <meta name="description" content="Tu cocina diseñada a medida, en 3D interactivo. Explorá cada detalle antes de que tome forma." />
-  <meta property="og:title" content="Proyecto Barzola · Toco Madera" />
-  <meta property="og:description" content="Tu cocina diseñada a medida, en 3D interactivo. Explorá cada detalle antes de que tome forma." />
+  <meta property="og:title" content="Proyecto Barzola · Tu cocina en 3D" />
+  <meta property="og:description" content="Explorá tu cocina diseñada a medida en 3D interactivo. Rotá, acercate, descubrí cada detalle." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://proyectobarzola.netlify.app/" />
   <meta name="twitter:card" content="summary_large_image" />
@@ -74,14 +74,31 @@
     .tdot { width: 6px; height: 6px; border-radius: 50%; background: var(--beige-dim); flex-shrink: 0; transition: background 0.3s; }
     .tdot.on { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
 
-    /* SCROLL DOWN */
+    /* CURSOR GRAB sobre el canvas */
+    #cv { cursor: grab; }
+    #cv:active { cursor: grabbing; }
+
+    /* HOVER STATE en hotspots */
+    .hd { transition: transform 0.2s, box-shadow 0.2s; }
+    .hm:hover .hd { transform: scale(1.4); box-shadow: 0 0 0 6px rgba(200,184,154,.25), 0 0 18px rgba(200,184,154,.4); }
+
+    /* OVERLAY DE INSTRUCCIÓN */
+    #drag-hint { position: absolute; inset: 0; z-index: 15; display: flex; flex-direction: column; align-items: center; justify-content: center; pointer-events: none; opacity: 0; animation: dhFade 0.6s 2s forwards; }
+    @keyframes dhFade { to { opacity: 1; } }
+    #drag-hint.out { animation: dhOut 0.5s forwards; }
+    @keyframes dhOut { to { opacity: 0; } }
+    .dh-icon { width: 48px; height: 48px; margin-bottom: 10px; opacity: 0.7; animation: dhSpin 1.8s ease-in-out infinite; }
+    @keyframes dhSpin { 0%,100%{transform:rotate(-20deg)} 50%{transform:rotate(20deg)} }
+    .dh-label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(224,220,211,0.45); }
+
+    /* SCROLL DOWN mejorado */
     .scroll-down { position: absolute; bottom: 68px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; opacity: 0; animation: sdFade 1s 4s forwards; }
     @keyframes sdFade { to { opacity: 1; } }
     .scroll-down.hidden { opacity: 0 !important; animation: none; }
-    .sd-line { width: 1px; height: 24px; background: linear-gradient(to bottom, transparent, rgba(224,220,211,0.25)); }
-    .sd-dot { width: 4px; height: 4px; border-radius: 50%; background: rgba(224,220,211,0.3); animation: sdBounce 1.8s ease-in-out 4s infinite; }
-    @keyframes sdBounce { 0%,100%{transform:translateY(0);opacity:.3} 50%{transform:translateY(4px);opacity:.65} }
-    .sd-label { font-size: 7px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(224,220,211,0.28); }
+    .sd-line { width: 1px; height: 28px; background: linear-gradient(to bottom, transparent, rgba(224,220,211,0.35)); }
+    .sd-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(224,220,211,0.5); animation: sdBounce 1.4s ease-in-out 4s infinite; }
+    @keyframes sdBounce { 0%,100%{transform:translateY(0);opacity:.4} 50%{transform:translateY(6px);opacity:.9} }
+    .sd-label { font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(224,220,211,0.45); font-weight: 500; }
 
     /* HINT oculto */
     .hint { display: none; }
@@ -200,7 +217,7 @@
           <g><path class="hc" d="m90.3,233.84h14.04s16.51-28.71,16.51-28.71h20.73s0-9.48,0-9.48l-24.77.09c-4.41,0-7.72-1.09-9.94-3.31-2.25-2.19-3.38-5.16-3.38-8.88,0-3.69,1.09-6.6,3.32-8.69,2.19-2.13,5.54-3.17,10.01-3.17h24.77s0-9.59,0-9.59h-24.77c-5.5,0-10.16.97-13.98,2.88-3.82,1.94-6.69,4.5-8.57,7.76-1.91,3.22-2.85,6.85-2.85,10.82,0,4.69,1.38,8.94,4.06,12.76,2.72,3.82,6.91,6.41,12.57,7.79l-17.76,29.74Z"/><path class="hc" d="m141.62,181.47v4.4h-15.46c-1.21,0-2.21-.98-2.21-2.19s1-2.21,2.21-2.21h15.46Z"/></g>
         </svg>
       </div>
-      <span class="hdr-badge">Edición exclusiva · 2025</span>
+      <span class="hdr-badge">Proyecto Barzola · 2025</span>
       <a href="https://wa.me/5491100000000" target="_blank" class="hdr-cta">
         Consultar
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -209,9 +226,21 @@
   </header>
 
   <section id="hero">
-    <div id="cc"><canvas id="cv"></canvas></div>
+    <div id="cc"><canvas id="cv" aria-label="Modelo 3D interactivo de cocina. Arrastrá para rotar, scroll para zoom."></canvas></div>
     <div class="grad-top"></div>
     <div class="grad-bot"></div>
+
+    <!-- Overlay instrucción drag -->
+    <div id="drag-hint">
+      <svg class="dh-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="24" cy="24" r="14" stroke="rgba(224,220,211,0.5)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M16 24 C16 24 18 18 24 18 C30 18 32 24 32 24 C32 24 30 30 24 30 C18 30 16 24 16 24Z" stroke="rgba(224,220,211,0.7)" stroke-width="1.5" fill="none"/>
+        <circle cx="24" cy="24" r="3" fill="rgba(224,220,211,0.8)"/>
+        <path d="M8 24 L4 20 M8 24 L4 28" stroke="rgba(224,220,211,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M40 24 L44 20 M40 24 L44 28" stroke="rgba(224,220,211,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="dh-label">Arrastrá para explorar</span>
+    </div>
 
     <div class="pinfo">
       <div class="ptag">Proyecto exclusivo · 2025</div>
@@ -366,9 +395,9 @@ controls.enableDamping = true; controls.dampingFactor = 0.07;
 controls.enablePan = false;
 controls.rotateSpeed = 0.5; controls.zoomSpeed = 0.5;
 controls.minPolarAngle = Math.PI/6; controls.maxPolarAngle = Math.PI/2.05;
-// Limitar rotación horizontal para no ver la parte trasera
-controls.minAzimuthAngle = -Math.PI * 0.85;
-controls.maxAzimuthAngle = Math.PI * 0.25;
+// Limitar rotación horizontal — el cliente no puede ver la parte trasera
+controls.minAzimuthAngle = -Math.PI * 0.9;
+controls.maxAzimuthAngle =  Math.PI * 0.2;
 
 // Scroll: solo capturar wheel cuando el mouse está sobre el canvas
 let overCanvas = false;
@@ -453,10 +482,9 @@ loader.load('models/kitchen.glb', (gltf) => {
 
   ground.position.y = box3.min.y + 0.005;
 
-  // Animación de entrada — giro suave automático al cargar
-  const introStart = Date.now();
-  const introDur = 1800;
-  const introStartAngle = angle + 0.25;
+  // Animación de entrada — giro suave al cargar
+  const introStartAngle = angle + 0.3;
+  const introStart = Date.now(), introDur = 2000;
   function introAnim() {
     const t = Math.min((Date.now() - introStart) / introDur, 1);
     const e = 1 - Math.pow(1 - t, 3);
@@ -472,7 +500,7 @@ loader.load('models/kitchen.glb', (gltf) => {
   }
   introAnim();
 
-  // 4. Hotspots DESPUÉS de centrar (posiciones ya correctas)
+  // 4. Hotspots
   positionHotspots(box3, size);
 
   setTimeout(() => {
@@ -490,6 +518,9 @@ canvas.addEventListener('pointerdown', () => {
     hasInteracted=true;
     const sd = document.getElementById('scroll-down');
     if (sd) sd.classList.add('hidden');
+    // Ocultar overlay de instrucción
+    const dh = document.getElementById('drag-hint');
+    if (dh) { dh.classList.add('out'); setTimeout(()=>dh.style.display='none', 600); }
   }
   if (tourActive) stopTour();
 });
@@ -499,12 +530,11 @@ window.addEventListener('scroll', () => {
   if (sd && window.scrollY > 20) sd.classList.add('hidden');
 }, { passive: true });
 
-// Reset
+// Reset — vuelve cámara a inicio, scroll al top
 document.getElementById('btn-reset').addEventListener('click', () => {
   if (!initPos) return;
-  // Solo mover cámara, sin scroll
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  const sP=camera.position.clone(), sT=controls.target.clone(), dur=900, t0=Date.now();
+  const sP=camera.position.clone(), sT=controls.target.clone(), dur=1000, t0=Date.now();
   function ar() { const t=Math.min((Date.now()-t0)/dur,1), e=1-Math.pow(1-t,3); camera.position.lerpVectors(sP,initPos,e); controls.target.lerpVectors(sT,initTgt,e); controls.update(); if(t<1) requestAnimationFrame(ar); }
   ar();
 });
@@ -536,8 +566,25 @@ function doStop(idx) {
   function at() { if (!tourActive) return; const t=Math.min((Date.now()-t0)/dur,1), e=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; camera.position.lerpVectors(sP,dest,e); controls.target.lerpVectors(sT,tgt,e); controls.update(); if(t<1) requestAnimationFrame(at); else if(tourActive) tourTimer=setTimeout(()=>{ cap.classList.remove('show'); setTimeout(()=>{ if(tourActive){tourIdx=(tourIdx+1)%tourStops.length;doStop(tourIdx);} },400); },3000); }
   at();
 }
-function startTour() { tourActive=true; const b=document.getElementById('btn-tour'); b.classList.add('active'); b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>Pausar`; tourIdx=0; doStop(0); }
-function stopTour() { tourActive=false; clearTimeout(tourTimer); document.getElementById('tcap').classList.remove('show'); const b=document.getElementById('btn-tour'); b.classList.remove('active'); b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="5 3 19 12 5 21 5 3"/></svg>Tour`; }
+function startTour() {
+  tourActive=true;
+  const b=document.getElementById('btn-tour');
+  b.classList.add('active');
+  b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg><span class="pb-label">Pausar</span>`;
+  tourIdx=0;
+  // Siempre vuelve a posición inicial antes de arrancar
+  const sP=camera.position.clone(), sT=controls.target.clone(), dur=800, t0=Date.now();
+  function snapHome() {
+    const t=Math.min((Date.now()-t0)/dur,1), e=1-Math.pow(1-t,3);
+    camera.position.lerpVectors(sP,initPos,e);
+    controls.target.lerpVectors(sT,initTgt,e);
+    controls.update();
+    if(t<1) requestAnimationFrame(snapHome);
+    else doStop(0);
+  }
+  snapHome();
+}
+function stopTour() { tourActive=false; clearTimeout(tourTimer); document.getElementById('tcap').classList.remove('show'); const b=document.getElementById('btn-tour'); b.classList.remove('active'); b.innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="5 3 19 12 5 21 5 3"/></svg><span class="pb-label">Tour</span>`; }
 document.getElementById('btn-tour').addEventListener('click', ()=>tourActive?stopTour():startTour());
 
 // Hotspots — posiciones ajustadas a la geometría real del modelo
@@ -559,6 +606,7 @@ function positionHotspots(box,size) {
     el.innerHTML=`<div class="hd"></div><div class="hcard"><div class="hcard-t">${def.l}</div><div class="hcard-d">${def.d}</div></div>`;
     el.addEventListener('click',(e)=>{
       e.stopPropagation();
+      // Cerrar el anterior
       if (activeHm && activeHm !== el) activeHm.classList.remove('active');
       el.classList.toggle('active');
       activeHm = el.classList.contains('active') ? el : null;
@@ -566,9 +614,9 @@ function positionHotspots(box,size) {
     cont.appendChild(el); hs3d.push({el,wp});
   });
   // Clic en canvas cierra todos
-  document.getElementById('cv').addEventListener('pointerdown', () => {
-    hs3d.forEach(({el}) => el.classList.remove('active'));
-    activeHm = null;
+  canvas.addEventListener('pointerdown', () => {
+    hs3d.forEach(({el})=>el.classList.remove('active'));
+    activeHm=null;
   });
 }
 function updateHS() {
@@ -578,29 +626,25 @@ function updateHS() {
     const p=wp.clone().project(camera);
     if(p.z>1){el.style.display='none';return;}
     el.style.display='';
-    const sx = (p.x*.5+.5)*w;
-    const sy = (-p.y*.5+.5)*h;
+    const sx=(p.x*.5+.5)*w, sy=(-p.y*.5+.5)*h;
     el.style.left=sx+'px'; el.style.top=sy+'px';
-    // Reposicionar hcard si se corta por arriba
-    const hcard = el.querySelector('.hcard');
-    if (hcard) {
-      const cardH = hcard.offsetHeight || 70;
-      if (sy - cardH - 20 < 60) {
-        hcard.style.bottom = 'auto';
-        hcard.style.top = 'calc(100% + 10px)';
+    // Reposicionar tooltip si se corta por bordes
+    const hcard=el.querySelector('.hcard');
+    if(hcard){
+      const cardH=hcard.offsetHeight||72;
+      // Arriba o abajo
+      if(sy-cardH-20 < 64) {
+        hcard.style.bottom='auto'; hcard.style.top='calc(100% + 10px)';
       } else {
-        hcard.style.bottom = 'calc(100% + 10px)';
-        hcard.style.top = 'auto';
+        hcard.style.bottom='calc(100% + 10px)'; hcard.style.top='auto';
       }
-      // Reposicionar si se corta por derecha
-      if (sx > w - 120) {
-        hcard.style.left = 'auto';
-        hcard.style.right = '0';
-        hcard.style.transform = 'none';
+      // Izquierda o derecha
+      if(sx > w-130) {
+        hcard.style.left='auto'; hcard.style.right='0'; hcard.style.transform='none';
+      } else if(sx < 100) {
+        hcard.style.left='0'; hcard.style.right='auto'; hcard.style.transform='none';
       } else {
-        hcard.style.left = '50%';
-        hcard.style.right = 'auto';
-        hcard.style.transform = 'translateX(-50%)';
+        hcard.style.left='50%'; hcard.style.right='auto'; hcard.style.transform='translateX(-50%)';
       }
     }
   });
