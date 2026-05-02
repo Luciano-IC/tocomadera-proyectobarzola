@@ -517,8 +517,7 @@ loader.load('models/kitchen.glb', (gltf) => {
   // CTA flotante aparece a los 18s
   setTimeout(() => document.getElementById('float-cta').classList.add('show'), 18000);
 
-}, (xhr) => { if (xhr.total) { fp = Math.min(xhr.loaded/xhr.total*88,88); } },
-(err) => { console.error(err); });
+}, () => {}, (err) => { console.error(err); });
 
 // Interacción
 let hasInteracted=false;
