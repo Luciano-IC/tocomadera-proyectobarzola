@@ -27,17 +27,8 @@
     }
     html, body { height: 100%; background: var(--bg); color: var(--beige); font-family: 'Poppins', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 
-    /* LOADING */
-    #loading { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2rem; transition: opacity 0.7s ease; }
-    #loading.out { opacity: 0; pointer-events: none; }
-    #loading svg { width: 180px; opacity: 0.9; }
-    .lbar-track { width: 120px; height: 1px; background: var(--beige-ultra); border-radius: 99px; overflow: hidden; }
-    .lbar-fill { height: 100%; width: 0%; background: rgba(224,220,211,0.3); border-radius: 99px; transition: width 0.2s ease-out; }
-    .ltext { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--beige-faint); }
-
     /* APP */
-    #app { opacity: 0; transition: opacity 0.5s ease; }
-    #app.on { opacity: 1; }
+    #app { opacity: 1; }
 
     /* HEADER */
     header { position: fixed; top: 10px; left: 0; right: 0; z-index: 100; padding: 0 12px; }
@@ -132,6 +123,35 @@
     .stitle { font-size: 11px; font-weight: 600; color: var(--beige); letter-spacing: 0.03em; line-height: 1.3; }
     .sval { font-size: 11px; color: var(--beige-dim); font-weight: 300; line-height: 1.6; padding-left: 42px; }
 
+    /* CTA FLOTANTE */
+    #float-cta { position: absolute; bottom: 72px; right: 24px; z-index: 15; opacity: 0; transform: translateY(8px); transition: opacity 0.5s, transform 0.5s; pointer-events: none; }
+    #float-cta.show { opacity: 1; transform: translateY(0); pointer-events: all; }
+    .fcta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 99px; background: #25D366; color: #fff; font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.3); transition: all 0.2s; white-space: nowrap; }
+    .fcta-btn:hover { transform: scale(1.04); box-shadow: 0 6px 28px rgba(37,211,102,0.45); }
+    .fcta-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* FULLSCREEN */
+    #btn-fs { position: absolute; top: 68px; right: 20px; z-index: 10; width: 34px; height: 34px; border-radius: 10px; background: rgba(26,22,19,0.75); backdrop-filter: blur(12px); border: 1px solid var(--border-s); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--beige-dim); transition: all 0.2s; }
+    #btn-fs:hover { color: var(--beige); background: rgba(26,22,19,0.95); }
+    #btn-fs svg { width: 14px; height: 14px; }
+    body.fullscreen #hero { position: fixed; inset: 0; z-index: 500; height: 100vh; }
+    body.fullscreen .pinfo, body.fullscreen .grad-top, body.fullscreen .grad-bot { opacity: 0; }
+    body.fullscreen #btn-fs { top: 16px; }
+
+    /* TIMELINE */
+    #timeline { padding: 0 20px 60px; max-width: 960px; margin: 0 auto; }
+    .tlabel { font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 28px; }
+    .tsteps { display: flex; align-items: flex-start; }
+    .tstep { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; }
+    .tstep:not(:last-child)::after { content: ''; position: absolute; top: 16px; left: 50%; width: 100%; height: 1px; background: linear-gradient(to right, var(--accent), rgba(200,184,154,0.2)); }
+    .tnum { width: 32px; height: 32px; border-radius: 50%; background: rgba(200,184,154,0.12); border: 1px solid rgba(200,184,154,0.35); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--accent); margin-bottom: 12px; position: relative; z-index: 1; }
+    .ttitle { font-size: 11px; font-weight: 600; color: var(--beige); margin-bottom: 4px; }
+    .tdesc { font-size: 10px; color: var(--beige-dim); line-height: 1.5; padding: 0 8px; }
+
+    /* CTA mejorado */
+    .ctabox { background: var(--bg2); border: 1px solid rgba(200,184,154,0.2); border-radius: var(--r); padding: 52px 40px; text-align: center; position: relative; overflow: hidden; }
+    .ctabox::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, rgba(200,184,154,0.06) 0%, transparent 70%); pointer-events: none; }
+
     /* CTA */
     #cta { padding: 0 20px 100px; max-width: 960px; margin: 0 auto; }
     .ctabox { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); padding: 52px 40px; text-align: center; }
@@ -161,6 +181,12 @@
       #specs { padding: 48px 16px 40px; }
       .sgrid { grid-template-columns: 1fr 1fr; }
       .scard { padding: 18px 14px; }
+      #timeline { padding: 0 16px 40px; }
+      .tsteps { flex-direction: column; gap: 24px; }
+      .tstep::after { display: none; }
+      .tstep { flex-direction: row; align-items: flex-start; text-align: left; gap: 16px; }
+      .tnum { flex-shrink: 0; margin-bottom: 0; }
+      #float-cta { bottom: 80px; right: 12px; }
       #cta { padding: 0 16px 48px; }
       .ctabox { padding: 32px 20px; }
       footer { padding: 16px 20px; justify-content: center; text-align: center; }
@@ -176,26 +202,6 @@
   </style>
 </head>
 <body>
-
-<div id="loading">
-  <svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg">
-    <style>.lc{fill:#e0dcd3}</style>
-    <rect class="lc" x="149.47" y="147.26" width="4.68" height="105.47"/>
-    <path class="lc" d="m240.07,162v7.64h-19.61v64.31h-9.39v-64.31h-19.72v-7.64h48.72Z"/>
-    <path class="lc" d="m265.98,229.97c-5.51-3.13-9.86-7.5-13.06-13.11-3.2-5.61-4.8-11.92-4.8-18.94s1.6-13.33,4.8-18.94c3.2-5.61,7.55-9.98,13.06-13.11,5.5-3.13,11.6-4.7,18.27-4.7s12.87,1.57,18.37,4.7c5.51,3.13,9.84,7.48,13.01,13.06,3.16,5.57,4.75,11.91,4.75,18.99s-1.59,13.42-4.75,18.99c-3.17,5.57-7.5,9.93-13.01,13.06-5.51,3.13-11.63,4.7-18.37,4.7s-12.77-1.56-18.27-4.7Zm31.84-6.97c4.03-2.34,7.19-5.68,9.5-10.01,2.31-4.34,3.46-9.36,3.46-15.07s-1.15-10.82-3.46-15.12c-2.31-4.3-5.45-7.62-9.45-9.96-3.99-2.34-8.53-3.51-13.62-3.51s-9.64,1.17-13.63,3.51c-3.99,2.34-7.14,5.66-9.45,9.96-2.31,4.3-3.46,9.34-3.46,15.12s1.15,10.74,3.46,15.07c2.31,4.34,5.47,7.67,9.5,10.01,4.03,2.34,8.55,3.51,13.58,3.51s9.55-1.17,13.57-3.51Z"/>
-    <path class="lc" d="m334.01,178.98c3.16-5.61,7.49-9.99,12.96-13.16,5.47-3.16,11.54-4.75,18.22-4.75,7.85,0,14.69,1.89,20.54,5.68,5.85,3.79,10.12,9.15,12.8,16.1h-11.25c-2-4.34-4.87-7.67-8.62-10.01-3.75-2.34-8.24-3.51-13.47-3.51s-9.53,1.17-13.52,3.51c-3.99,2.34-7.12,5.66-9.39,9.96-2.27,4.3-3.41,9.34-3.41,15.12s1.14,10.72,3.41,15.02c2.27,4.3,5.4,7.62,9.39,9.96,3.99,2.34,8.5,3.51,13.52,3.51s9.72-1.15,13.47-3.46c3.75-2.3,6.62-5.63,8.62-9.96h11.25c-2.68,6.88-6.95,12.2-12.8,15.95-5.85,3.75-12.7,5.63-20.54,5.63-6.68,0-12.75-1.57-18.22-4.7-5.47-3.13-9.79-7.48-12.96-13.06-3.16-5.57-4.75-11.87-4.75-18.89s1.59-13.33,4.75-18.94Z"/>
-    <path class="lc" d="m426.8,229.97c-5.51-3.13-9.86-7.5-13.06-13.11-3.2-5.61-4.8-11.92-4.8-18.94s1.6-13.33,4.8-18.94c3.2-5.61,7.55-9.98,13.06-13.11,5.5-3.13,11.6-4.7,18.27-4.7s12.87,1.57,18.37,4.7c5.51,3.13,9.84,7.48,13.01,13.06,3.16,5.57,4.75,11.91,4.75,18.99s-1.59,13.42-4.75,18.99c-3.17,5.57-7.5,9.93-13.01,13.06-5.51,3.13-11.63,4.7-18.37,4.7s-12.77-1.56-18.27-4.7Zm31.84-6.97c4.03-2.34,7.19-5.68,9.5-10.01,2.31-4.34,3.46-9.36,3.46-15.07s-1.15-10.82-3.46-15.12c-2.31-4.3-5.45-7.62-9.45-9.96-3.99-2.34-8.53-3.51-13.62-3.51s-9.64,1.17-13.63,3.51c-3.99,2.34-7.14,5.66-9.45,9.96-2.31,4.3-3.46,9.34-3.46,15.12s1.15,10.74,3.46,15.07c2.31,4.34,5.47,7.67,9.5,10.01,4.03,2.34,8.55,3.51,13.58,3.51s9.55-1.17,13.57-3.51Z"/>
-    <path class="lc" d="m568.95,162.2v71.74h-11.77v-49.14l-21.89,49.14h-8.15l-21.99-49.14v49.14h-11.77v-71.74h12.7l25.19,56.26,25.08-56.26h12.59Z"/>
-    <path class="lc" d="m612.71,176.35l-20.23,57.6h-12.28l25.71-71.85h13.62l25.71,71.85h-12.39l-20.13-57.6Z"/>
-    <path class="lc" d="m699.89,166.59c5.74,2.93,10.19,7.12,13.32,12.59,3.13,5.47,4.7,11.85,4.7,19.15s-1.57,13.63-4.7,18.99c-3.13,5.37-7.57,9.48-13.32,12.34-5.75,2.86-12.44,4.28-20.08,4.28h-23.43v-71.74h23.43c7.64,0,14.33,1.46,20.08,4.39Zm-.78,50.94c4.47-4.54,6.71-10.94,6.71-19.2s-2.24-14.83-6.71-19.51c-4.47-4.68-10.91-7.02-19.3-7.02h-11.67v52.54h11.67c8.4,0,14.83-2.27,19.3-6.81Z"/>
-    <path class="lc" d="m741.33,171.7v24.03h24.79l.04,9.39h-24.77l-.05,19.23h27.87v9.6h-39.64v-71.85h39.64v9.6h-27.87Z"/>
-    <path class="lc" d="m877.18,176.35l-20.23,57.6h-12.28l25.71-71.85h13.62l25.71,71.85h-12.39l-20.13-57.6Z"/>
-    <g><path class="lc" d="m834.95,233.95h-14.04l-16.51-28.71h-20.73v-9.48l24.77.09c4.41,0,7.72-1.09,9.94-3.31,2.25-2.19,3.38-5.16,3.38-8.88s-1.09-6.6-3.32-8.69c-2.19-2.13-5.54-3.17-10.01-3.17h-24.77v-9.59h24.77c5.5,0,10.16.97,13.98,2.88,3.82,1.94,6.69,4.5,8.57,7.76,1.91,3.22,2.85,6.85,2.85,10.82,0,4.69-1.38,8.94-4.06,12.76-2.72,3.82-6.91,6.41-12.57,7.79l17.76,29.74Z"/><path class="lc" d="m783.63,181.57v4.4s15.46,0,15.46,0c1.21,0,2.21-.98,2.21-2.19,0-1.21-1-2.21-2.21-2.21h-15.46Z"/></g>
-    <g><path class="lc" d="m90.3,233.84h14.04s16.51-28.71,16.51-28.71h20.73s0-9.48,0-9.48l-24.77.09c-4.41,0-7.72-1.09-9.94-3.31-2.25-2.19-3.38-5.16-3.38-8.88,0-3.69,1.09-6.6,3.32-8.69,2.19-2.13,5.54-3.17,10.01-3.17h24.77s0-9.59,0-9.59h-24.77c-5.5,0-10.16.97-13.98,2.88-3.82,1.94-6.69,4.5-8.57,7.76-1.91,3.22-2.85,6.85-2.85,10.82,0,4.69,1.38,8.94,4.06,12.76,2.72,3.82,6.91,6.41,12.57,7.79l-17.76,29.74Z"/><path class="lc" d="m141.62,181.47v4.4h-15.46c-1.21,0-2.21-.98-2.21-2.19s1-2.21,2.21-2.21h15.46Z"/></g>
-  </svg>
-  <div class="lbar-track"><div class="lbar-fill" id="lb"></div></div>
-  <span class="ltext">Cargando modelo 3D</span>
-</div>
 
 <div id="app">
   <header>
@@ -229,6 +235,19 @@
     <div id="cc"><canvas id="cv" aria-label="Modelo 3D interactivo de cocina. Arrastrá para rotar, scroll para zoom."></canvas></div>
     <div class="grad-top"></div>
     <div class="grad-bot"></div>
+
+    <!-- Botón fullscreen -->
+    <button id="btn-fs" title="Pantalla completa">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+    </button>
+
+    <!-- CTA flotante WhatsApp -->
+    <div id="float-cta">
+      <a href="https://wa.me/5491100000000" target="_blank" class="fcta-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Consultá sobre esta cocina
+      </a>
+    </div>
 
     <!-- Overlay instrucción drag -->
     <div id="drag-hint">
@@ -333,10 +352,28 @@
       </div>
     </section>
 
+    <section id="timeline">
+      <div class="tlabel">De la confirmación a tu cocina</div>
+      <div class="tsteps">
+        <div class="tstep">
+          <div class="tnum">1</div>
+          <div><div class="ttitle">Confirmás hoy</div><div class="tdesc">Revisamos los detalles finales y cerramos el proyecto juntos.</div></div>
+        </div>
+        <div class="tstep">
+          <div class="tnum">2</div>
+          <div><div class="ttitle">Fabricación: 3 semanas</div><div class="tdesc">Cada módulo hecho a medida en nuestro taller con control total de calidad.</div></div>
+        </div>
+        <div class="tstep">
+          <div class="tnum">3</div>
+          <div><div class="ttitle">Instalación en tu casa</div><div class="tdesc">Nuestro equipo instala y deja todo listo. Sin obra, sin estrés.</div></div>
+        </div>
+      </div>
+    </section>
+
     <section id="cta">
       <div class="ctabox">
-        <h2 class="cta-t">¿Te imaginás así tu espacio?</h2>
-        <p class="cta-s">Tu cocina, diseñada a medida con los mejores materiales.<br>Hablemos y lo hacemos realidad.</p>
+        <h2 class="cta-t">Esta cocina está lista para ser tuya.</h2>
+        <p class="cta-s">Confirmá y empezamos esta semana.<br>Diseño a medida, materiales premium, instalación incluida.</p>
         <a href="https://wa.me/5491100000000" target="_blank" class="ctabtn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
           Hablar por WhatsApp
@@ -360,9 +397,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 
-const bar = document.getElementById('lb');
+const canvas = document.getElementById('cv');
 let fp = 5;
-const fi = setInterval(() => { fp = Math.min(fp + Math.random()*8+2, 88); bar.style.width = fp+'%'; }, 150);
+const fi = setInterval(() => { fp = Math.min(fp + Math.random()*8+2, 88); }, 150);
 
 const canvas = document.getElementById('cv');
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -426,7 +463,7 @@ draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
 loader.setDRACOLoader(draco);
 
 loader.load('models/kitchen.glb', (gltf) => {
-  clearInterval(fi); bar.style.width = '100%';
+  
   const model = gltf.scene;
 
   model.traverse(child => {
@@ -503,13 +540,11 @@ loader.load('models/kitchen.glb', (gltf) => {
   // 4. Hotspots
   positionHotspots(box3, size);
 
-  setTimeout(() => {
-    document.getElementById('loading').classList.add('out');
-    setTimeout(() => { document.getElementById('loading').style.display='none'; document.getElementById('app').classList.add('on'); }, 750);
-  }, 300);
+  // CTA flotante aparece a los 18s
+  setTimeout(() => document.getElementById('float-cta').classList.add('show'), 18000);
 
-}, (xhr) => { if (xhr.total) bar.style.width = Math.min(xhr.loaded/xhr.total*88,88)+'%'; },
-(err) => { console.error(err); clearInterval(fi); document.getElementById('loading').classList.add('out'); setTimeout(()=>{ document.getElementById('loading').style.display='none'; document.getElementById('app').classList.add('on'); },750); });
+}, (xhr) => { if (xhr.total) { fp = Math.min(xhr.loaded/xhr.total*88,88); } },
+(err) => { console.error(err); });
 
 // Interacción
 let hasInteracted=false;
@@ -537,6 +572,22 @@ document.getElementById('btn-reset').addEventListener('click', () => {
   const sP=camera.position.clone(), sT=controls.target.clone(), dur=1000, t0=Date.now();
   function ar() { const t=Math.min((Date.now()-t0)/dur,1), e=1-Math.pow(1-t,3); camera.position.lerpVectors(sP,initPos,e); controls.target.lerpVectors(sT,initTgt,e); controls.update(); if(t<1) requestAnimationFrame(ar); }
   ar();
+});
+
+// Fullscreen
+document.getElementById('btn-fs').addEventListener('click', () => {
+  document.body.classList.toggle('fullscreen');
+  const fs = document.body.classList.contains('fullscreen');
+  document.getElementById('btn-fs').innerHTML = fs
+    ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>`
+    : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>`;
+  setTimeout(resize, 100);
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && document.body.classList.contains('fullscreen')) {
+    document.body.classList.remove('fullscreen');
+    resize();
+  }
 });
 
 // Tour — ángulos ajustados a la orientación real del modelo
