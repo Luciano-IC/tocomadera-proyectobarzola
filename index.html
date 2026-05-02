@@ -469,7 +469,7 @@ draco.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.7/');
 loader.setDRACOLoader(draco);
 
 loader.load('models/kitchen.glb', (gltf) => {
-  clearInterval(fi); bar.style.width = '100%';
+
   const model = gltf.scene;
 
   model.traverse(child => {
@@ -534,13 +534,8 @@ loader.load('models/kitchen.glb', (gltf) => {
   // CTA flotante — aparece a los 18s
   setTimeout(() => document.getElementById('float-cta').classList.add('show'), 18000);
 
-  setTimeout(() => {
-    document.getElementById('loading').classList.add('out');
-    setTimeout(() => { document.getElementById('loading').style.display='none'; }, 750);
-  }, 300);
-
 },  null,
-(err) => { console.error(err); clearInterval(fi); document.getElementById('loading').classList.add('out'); setTimeout(()=>{ document.getElementById('loading').style.display='none'; },750); });
+}, null, (err) => { console.error(err); });
 
 // Interacción — ocultar hints al primer toque
 let hasInteracted = false;
