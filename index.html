@@ -38,8 +38,7 @@
     .hdr-cta { font-size: 11px; font-weight: 600; font-family: 'Poppins', sans-serif; color: var(--bg); background: var(--beige); border: none; cursor: pointer; padding: 7px 16px; border-radius: 99px; transition: opacity 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
     .hdr-cta:hover { opacity: 0.82; }
 
-    /* HERO — 82vh para dejar espacio libre abajo donde scrollear */
-    #hero { position: relative; width: 100%; height: 82vh; min-height: 500px; }
+    #hero { position: relative; width: 100%; height: 100vh; }
     #cc { position: absolute; inset: 0; }
     #cv { width: 100% !important; height: 100% !important; display: block; touch-action: none; cursor: grab; }
     #cv:active { cursor: grabbing; }
@@ -151,8 +150,7 @@
     /* RESPONSIVE */
     @media (max-width: 768px) {
       .hdr-badge { display: none; }
-      #hero { height: 78vh; }
-      .pinfo { bottom: 60px; left: 20px; max-width: calc(100vw - 40px); }
+      .pinfo { bottom: 72px; left: 20px; max-width: calc(100vw - 40px); }
       .ptitle { font-size: clamp(28px, 7vw, 36px); white-space: normal; }
       .pdesc { font-size: 12px; }
       .cbar { bottom: 14px; padding: 4px 6px; }
@@ -171,7 +169,6 @@
     }
     @media (min-width: 769px) and (max-width: 1024px) {
       .sgrid { grid-template-columns: repeat(2, 1fr); }
-      #hero { height: 80vh; }
     }
   </style>
 </head>
@@ -383,12 +380,18 @@ controls.minPolarAngle = Math.PI/6; controls.maxPolarAngle = Math.PI/2.05;
 controls.minAzimuthAngle = -Math.PI * 0.9;
 controls.maxAzimuthAngle =  Math.PI * 0.2;
 
-// Scroll: solo capturar wheel cuando el mouse está sobre el canvas
+// Scroll inteligente — antes de interactuar, wheel scrollea la página
 let overCanvas = false;
 canvas.addEventListener('mouseenter', () => overCanvas = true);
 canvas.addEventListener('mouseleave', () => overCanvas = false);
-// Prevenir que OrbitControls capture el scroll de la página
-canvas.addEventListener('wheel', (e) => { if (!overCanvas) e.stopImmediatePropagation(); }, { passive: true });
+canvas.addEventListener('wheel', (e) => {
+  if (!hasInteracted) {
+    // Aún no interactuó con el modelo — scrollear la página
+    window.scrollBy({ top: e.deltaY, behavior: 'auto' });
+    e.stopImmediatePropagation();
+  }
+  // Si ya interactuó, OrbitControls toma el control normalmente
+}, { passive: true });
 
 // Lights
 scene.add(new THREE.AmbientLight('#c8b8a8', 0.45));
