@@ -443,15 +443,15 @@ loader.load('models/kitchen.glb', (gltf) => {
   const maxDim = Math.max(size.x, size.y, size.z);
   const fovR = camera.fov * Math.PI / 180;
   const isMobile = window.innerWidth < 768;
-  const zoomFactor = isMobile ? 1.7 : 1.35;
+  const zoomFactor = isMobile ? 1.6 : 1.3;
   const dist = (maxDim * zoomFactor) / (2 * Math.tan(fovR / 2));
 
   controls.minDistance = dist * 0.25;
   controls.maxDistance = dist * 3.5;
 
-  const tgt = new THREE.Vector3(0, center3.y * 0.35, 0);
-  // Ángulo desde la derecha del modelo para mejor encuadre
-  const angle = Math.PI * 0.35;
+  const tgt = new THREE.Vector3(0, center3.y * 0.4, 0);
+  // Ángulo original que muestra el frente de la cocina correctamente
+  const angle = -Math.PI * 0.6;
   const pos = new THREE.Vector3(
     dist * Math.sin(angle),
     tgt.y + dist * 0.38,
@@ -538,7 +538,7 @@ document.addEventListener('keydown', e => {
 });
 
 // Tour — 4 paradas con vistas claramente distintas
-const BASE = Math.PI * 0.35; // ángulo base = vista inicial desde la derecha
+const BASE = -Math.PI * 0.6;
 const tourStops = [
   // 1. Vista general — desde la derecha, ligeramente elevada, cocina completa
   { az: BASE,              pol: Math.PI/3.5,  d: 1.0,  t: "Vista general",       s: "Tu cocina completa en un vistazo" },
