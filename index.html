@@ -450,8 +450,8 @@ loader.load('models/kitchen.glb', (gltf) => {
   controls.maxDistance = dist * 3.5;
 
   const tgt = new THREE.Vector3(0, center3.y * 0.4, 0);
-  // Ángulo original que muestra el frente de la cocina correctamente
-  const angle = -Math.PI * 0.6;
+  // Ángulo desde la derecha — muestra la parte abierta de la cocina sin la pared
+  const angle = -Math.PI * 0.35;
   const pos = new THREE.Vector3(
     dist * Math.sin(angle),
     tgt.y + dist * 0.38,
@@ -538,7 +538,7 @@ document.addEventListener('keydown', e => {
 });
 
 // Tour — 4 paradas con vistas claramente distintas
-const BASE = -Math.PI * 0.6;
+const BASE = -Math.PI * 0.35;
 const tourStops = [
   // 1. Vista general — desde la derecha, ligeramente elevada, cocina completa
   { az: BASE,              pol: Math.PI/3.5,  d: 1.0,  t: "Vista general",       s: "Tu cocina completa en un vistazo" },
