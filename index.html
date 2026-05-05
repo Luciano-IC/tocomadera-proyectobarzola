@@ -52,7 +52,7 @@
     .pdesc { font-size: 12px; color: rgba(224,220,211,0.75); line-height: 1.7; font-weight: 300; }
 
     /* BARRA CONTROLES */
-    .cbar { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; gap: 4px; align-items: center; background: rgba(26,22,19,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-s); border-radius: 99px; padding: 5px 8px; }
+    .cbar { position: absolute; bottom: 20px; right: 36px; z-index: 10; display: flex; gap: 4px; align-items: center; background: rgba(26,22,19,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-s); border-radius: 99px; padding: 5px 8px; }
     .cbar-sep { width: 1px; height: 16px; background: var(--border-s); margin: 0 2px; flex-shrink: 0; }
     .pb { height: 30px; display: inline-flex; align-items: center; gap: 5px; padding: 0 11px; border-radius: 99px; background: transparent; border: none; color: var(--beige-dim); font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
     .pb svg { width: 12px; height: 12px; flex-shrink: 0; }
@@ -152,7 +152,7 @@
       .ptitle { font-size: clamp(26px, 7vw, 34px); white-space: normal; margin-bottom: 4px; }
       .pdesc-desktop { display: none; }
       .pdesc-mobile { display: block; font-size: 13px; }
-      .cbar { bottom: 14px; padding: 4px 6px; gap: 2px; }
+      .cbar { bottom: 14px; left: 50%; transform: translateX(-50%); right: auto; padding: 4px 6px; gap: 2px; }
       .pb { font-size: 9px; padding: 0 8px; height: 28px; }
       .pb .pb-label { display: inline; }
       #specs { padding: 48px 16px 40px; }
