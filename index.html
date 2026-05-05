@@ -113,8 +113,8 @@
     body.fullscreen .pinfo, body.fullscreen .grad-top, body.fullscreen .grad-bot { opacity: 0; }
     body.fullscreen #btn-fs { top: 16px; }
 
-    /* CTA FLOTANTE — position fixed para que sea siempre visible */
-    #float-cta { position: fixed; bottom: 24px; right: 24px; z-index: 9999; opacity: 0; transform: translateY(8px); transition: opacity 0.5s, transform 0.5s; pointer-events: none; }
+    /* CTA FLOTANTE — aparece al scrollear, abajo izquierda */
+    #float-cta { position: fixed; bottom: 24px; left: 24px; z-index: 9999; opacity: 0; transform: translateY(8px); transition: opacity 0.4s, transform 0.4s; pointer-events: none; }
     #float-cta.show { opacity: 1; transform: translateY(0); pointer-events: all; }
     .fcta-btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: 99px; background: #25D366; color: #fff; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: all 0.2s; white-space: nowrap; }
     .fcta-btn:hover { transform: scale(1.04); box-shadow: 0 6px 28px rgba(37,211,102,0.5); }
@@ -125,14 +125,15 @@
 
     /* SPECS */
     #specs { padding: 64px 20px 56px; max-width: 960px; margin: 0 auto; }
-    .slabel { font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 28px; }
+    .slabel { font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 8px; text-align: center; }
+    .stitle-section { font-size: clamp(20px, 2.5vw, 28px); font-weight: 600; color: var(--beige); text-align: center; margin-bottom: 36px; letter-spacing: -0.01em; }
     .sgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; background: var(--border); }
-    .scard { background: var(--bg2); padding: 24px 20px; display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center; }
-    .shdr { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .scard { background: var(--bg2); padding: 24px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .shdr { display: flex; align-items: center; gap: 10px; }
     .sico { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: var(--beige-ultra); border: 1px solid var(--border); color: var(--accent); }
     .sico svg { width: 15px; height: 15px; }
     .stitle { font-size: 11px; font-weight: 600; color: var(--beige); letter-spacing: 0.03em; line-height: 1.3; white-space: nowrap; }
-    .sval { font-size: 11px; color: var(--beige-dim); font-weight: 300; line-height: 1.6; padding-left: 0; }
+    .sval { font-size: 11px; color: var(--beige-dim); font-weight: 300; line-height: 1.6; text-align: center; }
 
     /* CTA FINAL — sin recuadro, minimalista */
     #cta { padding: 20px 20px 100px; max-width: 700px; margin: 0 auto; text-align: center; }
@@ -163,7 +164,7 @@
       #specs { padding: 48px 16px 40px; }
       .sgrid { grid-template-columns: 1fr 1fr; }
       .scard { padding: 18px 14px; }
-      #float-cta { bottom: auto; top: 70px; right: 16px; }
+      #float-cta { bottom: 16px; left: 16px; top: auto; right: auto; }
       #cta { padding: 20px 20px 60px; }
       footer { padding: 16px 20px; }
     }
@@ -199,8 +200,8 @@
       </div>
       <span class="hdr-badge">Proyecto Barzola · 2025</span>
       <a href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20consultar%20sobre%20mi%20proyecto" target="_blank" class="hdr-cta">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         Consultar
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
   </header>
@@ -273,7 +274,8 @@
 
   <div id="below">
     <section id="specs">
-      <div class="slabel">Especificaciones del proyecto</div>
+      <div class="slabel">Materiales y detalles</div>
+      <div class="stitle-section">Especificaciones del proyecto</div>
       <div class="sgrid">
 
         <div class="scard">
@@ -281,7 +283,7 @@
             <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
             <div class="stitle">Melamina Sauco Blend · Faplac</div>
           </div>
-          <div class="sval">Tablero de alta densidad con textura madera natural y cantos ABS anti-humedad.</div>
+          <div class="sval">Tablero de alta densidad, textura madera<br>natural y cantos ABS anti-humedad.</div>
         </div>
 
         <div class="scard">
@@ -289,7 +291,7 @@
             <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
             <div class="stitle">Herrajes Häfele Premium</div>
           </div>
-          <div class="sval">Bisagras y correderas de cierre suave. Durabilidad y precisión de movimiento.</div>
+          <div class="sval">Bisagras y correderas de cierre suave.<br>Durabilidad y precisión de movimiento.</div>
         </div>
 
         <div class="scard">
@@ -297,7 +299,7 @@
             <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 20h20M4 20V10l8-6 8 6v10"/><rect x="9" y="14" width="6" height="6"/></svg></div>
             <div class="stitle">Mesada Johnson Piedra Natural</div>
           </div>
-          <div class="sval">Línea alta Johnson. Terminación pulida, altísima resistencia y belleza incomparable.</div>
+          <div class="sval">Línea alta Johnson. Terminación pulida,<br>altísima resistencia y belleza incomparable.</div>
         </div>
 
         <div class="scard">
@@ -305,7 +307,7 @@
             <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M2 11h20M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg></div>
             <div class="stitle">Isla Central con Almacenamiento</div>
           </div>
-          <div class="sval">Isla protagonista con módulos internos integrados y amplia superficie de trabajo.</div>
+          <div class="sval">Isla protagonista con módulos integrados<br>y amplia superficie de trabajo.</div>
         </div>
 
         <div class="scard">
@@ -313,7 +315,7 @@
             <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="8" y="9" width="8" height="4" rx="1"/><path d="M10 19l-2 2M14 19l2 2M6 21h12"/></svg></div>
             <div class="stitle">Módulos para Electrodomésticos</div>
           </div>
-          <div class="sval">Espacios diseñados a medida para horno, microondas y electrodomésticos integrados.</div>
+          <div class="sval">Espacios a medida para horno, microondas<br>y electrodomésticos integrados.</div>
         </div>
 
         <div class="scard">
@@ -321,7 +323,7 @@
             <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
             <div class="stitle">Iluminación LED bajo Alacena</div>
           </div>
-          <div class="sval">Tiras LED cálidas integradas. Iluminan la mesada y crean profundidad ambiental.</div>
+          <div class="sval">Tiras LED cálidas integradas bajo alacena.<br>Iluminan la mesada y crean profundidad.</div>
         </div>
 
       </div>
@@ -496,30 +498,23 @@ loader.load('models/kitchen.glb', (gltf) => {
   // 4. Hotspots
   positionHotspots(box3, size);
 
-// CTA flotante — se oculta al acercarse al CTA final
+// CTA flotante — aparece al scrollear fuera del hero, se oculta al llegar al CTA final
 function updateFloatCta() {
   const floatCta = document.getElementById('float-cta');
   const ctaSection = document.getElementById('cta');
-  if (!floatCta || !ctaSection || !floatCtaVisible) return;
-  const ctaRect = ctaSection.getBoundingClientRect();
+  const hero = document.getElementById('hero');
+  if (!floatCta || !ctaSection || !hero) return;
+  const heroBottom = hero.getBoundingClientRect().bottom;
+  const ctaTop = ctaSection.getBoundingClientRect().top;
   const windowH = window.innerHeight;
-  if (ctaRect.top < windowH * 0.85) {
-    floatCta.style.opacity = '0';
-    floatCta.style.pointerEvents = 'none';
+  // Aparece cuando el hero ya no es visible (usuario scrolleó)
+  if (heroBottom < windowH * 0.5 && ctaTop > windowH * 0.85) {
+    floatCta.classList.add('show');
   } else {
-    floatCta.style.opacity = '1';
-    floatCta.style.pointerEvents = 'all';
+    floatCta.classList.remove('show');
   }
 }
-let floatCtaVisible = false;
 window.addEventListener('scroll', updateFloatCta, { passive: true });
-
-// CTA flotante aparece a los 8s
-setTimeout(() => {
-  floatCtaVisible = true;
-  document.getElementById('float-cta').classList.add('show');
-  updateFloatCta();
-}, 8000);
 
 }, () => {}, (err) => { console.error(err); });
 
