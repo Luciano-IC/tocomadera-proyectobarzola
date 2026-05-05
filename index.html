@@ -33,7 +33,7 @@
     /* HEADER */
     header { position: fixed; top: 10px; left: 0; right: 0; z-index: 100; padding: 0 12px; }
     .hdr { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; height: 48px; background: rgba(26,22,19,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 1rem; }
-    .hdr-logo svg { height: 32px; display: block; }
+    .hdr-logo svg { height: 38px; display: block; }
     .hdr-badge { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--beige); background: rgba(200,184,154,0.15); border: 1px solid rgba(200,184,154,0.3); padding: 4px 12px; border-radius: 99px; font-weight: 500; }
     .hdr-cta { font-size: 11px; font-weight: 600; font-family: 'Poppins', sans-serif; color: #fff; background: #25D366; border: none; cursor: pointer; padding: 7px 16px; border-radius: 99px; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 2px 12px rgba(37,211,102,0.3); }
     .hdr-cta:hover { opacity: 0.88; transform: scale(1.02); }
@@ -103,13 +103,9 @@
     .tc-t { font-size: 12px; font-weight: 600; color: var(--beige); margin-bottom: 4px; }
     .tc-s { font-size: 10px; color: var(--beige-dim); }
 
-    /* BTN FULLSCREEN */
-    #btn-fs { position: absolute; top: 68px; right: 20px; z-index: 10; width: 34px; height: 34px; border-radius: 10px; background: rgba(26,22,19,0.75); backdrop-filter: blur(12px); border: 1px solid var(--border-s); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--beige-dim); transition: all 0.2s; }
-    #btn-fs:hover { color: var(--beige); background: rgba(26,22,19,0.95); }
-    #btn-fs svg { width: 14px; height: 14px; }
+    /* FULLSCREEN — integrado en la cbar */
     body.fullscreen #hero { position: fixed; inset: 0; z-index: 500; height: 100vh; }
     body.fullscreen .pinfo, body.fullscreen .grad-top, body.fullscreen .grad-bot { opacity: 0; }
-    body.fullscreen #btn-fs { top: 16px; }
 
     /* CTA FLOTANTE — aparece al scrollear, abajo izquierda */
     #float-cta { position: fixed; bottom: 24px; left: 24px; z-index: 9999; opacity: 0; transform: translateY(8px); transition: opacity 0.4s, transform 0.4s; pointer-events: none; }
@@ -197,7 +193,6 @@
           <g><path class="hc" d="m90.3,233.84h14.04s16.51-28.71,16.51-28.71h20.73s0-9.48,0-9.48l-24.77.09c-4.41,0-7.72-1.09-9.94-3.31-2.25-2.19-3.38-5.16-3.38-8.88,0-3.69,1.09-6.6,3.32-8.69,2.19-2.13,5.54-3.17,10.01-3.17h24.77s0-9.59,0-9.59h-24.77c-5.5,0-10.16.97-13.98,2.88-3.82,1.94-6.69,4.5-8.57,7.76-1.91,3.22-2.85,6.85-2.85,10.82,0,4.69,1.38,8.94,4.06,12.76,2.72,3.82,6.91,6.41,12.57,7.79l-17.76,29.74Z"/><path class="hc" d="m141.62,181.47v4.4h-15.46c-1.21,0-2.21-.98-2.21-2.19s1-2.21,2.21-2.21h15.46Z"/></g>
         </svg>
       </div>
-      <span class="hdr-badge">Proyecto Barzola · 2025</span>
       <a href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20consultar%20sobre%20mi%20proyecto" target="_blank" class="hdr-cta">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         Consultar
@@ -209,11 +204,6 @@
     <div id="cc"><canvas id="cv" aria-label="Modelo 3D interactivo de cocina. Arrastrá para rotar, scroll para zoom."></canvas></div>
     <div class="grad-top"></div>
     <div class="grad-bot"></div>
-
-    <!-- Botón fullscreen -->
-    <button id="btn-fs" title="Pantalla completa">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-    </button>
 
     <!-- CTA flotante WhatsApp -->
     <div id="float-cta">
@@ -257,6 +247,10 @@
       <button class="pb" id="btn-reset">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
         <span class="pb-label">Restablecer</span>
+      </button>
+      <div class="cbar-sep"></div>
+      <button class="pb" id="btn-fs" title="Pantalla completa">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
       </button>
     </div>
 
