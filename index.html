@@ -79,13 +79,7 @@
     .dh-label { font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(224,220,211,0.8); font-weight: 500; text-shadow: 0 1px 8px rgba(0,0,0,0.8); }
 
     /* SCROLL DOWN */
-    .scroll-down { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; opacity: 0; animation: sdFade 1s 4s forwards; }
-    @keyframes sdFade { to { opacity: 1; } }
-    .scroll-down.hidden { opacity: 0 !important; animation: none; }
-    .sd-line { width: 1px; height: 28px; background: linear-gradient(to bottom, transparent, rgba(224,220,211,0.4)); }
-    .sd-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(224,220,211,0.5); animation: sdBounce 1.4s ease-in-out 4s infinite; }
-    @keyframes sdBounce { 0%,100%{transform:translateY(0);opacity:.4} 50%{transform:translateY(6px);opacity:.9} }
-    .sd-label { font-size: 8px; letter-spacing: 0.4em; text-transform: uppercase; color: rgba(224,220,211,0.5); font-weight: 500; }
+    /* scroll-down eliminado */
 
     /* HINT */
     .hint { display: none; }
@@ -261,11 +255,7 @@
     </div>
 
     <!-- Scroll down minimalista -->
-    <div class="scroll-down" id="scroll-down">
-      <span class="sd-label">Ver proyecto</span>
-      <div class="sd-line"></div>
-      <div class="sd-dot"></div>
-    </div>
+
 
     <div class="hint" id="hint"></div>
   </section>
@@ -523,19 +513,11 @@ let hasInteracted=false;
 canvas.addEventListener('pointerdown', () => {
   if (!hasInteracted) {
     hasInteracted=true;
-    const sd = document.getElementById('scroll-down');
-    if (sd) sd.classList.add('hidden');
-    // Ocultar overlay de instrucción
     const dh = document.getElementById('drag-hint');
     if (dh) { dh.classList.add('out'); setTimeout(()=>dh.style.display='none', 600); }
   }
   if (tourActive) stopTour();
 });
-// Ocultar scroll-down al hacer scroll
-window.addEventListener('scroll', () => {
-  const sd = document.getElementById('scroll-down');
-  if (sd && window.scrollY > 20) sd.classList.add('hidden');
-}, { passive: true });
 
 // Reset — vuelve cámara a inicio, scroll al top
 document.getElementById('btn-reset').addEventListener('click', () => {
