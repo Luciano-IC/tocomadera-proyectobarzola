@@ -44,6 +44,9 @@
     #cv:active { cursor: grabbing; }
     .grad-top { position: absolute; top: 0; left: 0; right: 0; height: 100px; background: linear-gradient(to bottom, var(--bg) 0%, rgba(26,22,19,0.6) 70%, transparent 100%); pointer-events: none; z-index: 2; }
     .grad-bot { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, var(--bg) 0%, rgba(26,22,19,0.85) 50%, transparent 100%); pointer-events: none; z-index: 2; }
+    @media (max-width: 768px) {
+      .grad-bot { height: 280px; background: linear-gradient(to top, var(--bg) 0%, rgba(26,22,19,0.92) 40%, rgba(26,22,19,0.5) 70%, transparent 100%); }
+    }
 
     /* PROJECT INFO — jerarquía tipográfica premium */
     .pinfo { position: absolute; z-index: 10; bottom: 72px; left: 36px; max-width: 340px; }
@@ -455,7 +458,9 @@ loader.load('models/kitchen.glb', (gltf) => {
 
   // Desktop: target ligeramente desplazado a la izquierda para centrar visualmente el modelo
   const tgtX = isMobile ? 0 : -center3.x * 0.3;
-  const tgt = new THREE.Vector3(tgtX, center3.y * 0.65, 0);
+  // Mobile: target Y más bajo para que el modelo baje y el techo no se corte
+  const tgtY = isMobile ? center3.y * 0.85 : center3.y * 0.65;
+  const tgt = new THREE.Vector3(tgtX, tgtY, 0);
   // Mobile: ángulo más frontal. Desktop: desde la derecha
   const angle = isMobile ? -Math.PI * 0.5 : -Math.PI * 0.35;
   const pos = new THREE.Vector3(
