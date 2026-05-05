@@ -39,20 +39,51 @@
     .hdr-cta:hover { opacity: 0.88; transform: scale(1.02); }
 
     #hero { position: relative; width: 100%; height: 100vh; }
+    /* Textura de veta de madera — sutil, cálida, sobre el fondo oscuro */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image:
+        repeating-linear-gradient(
+          92deg,
+          transparent 0px,
+          rgba(200,184,154,0.9) 1px,
+          transparent 2px,
+          transparent 18px,
+          rgba(180,160,130,0.6) 19px,
+          transparent 20px,
+          transparent 34px,
+          rgba(200,184,154,0.4) 35px,
+          transparent 36px,
+          transparent 60px
+        ),
+        repeating-linear-gradient(
+          89deg,
+          transparent 0px,
+          rgba(200,184,154,0.3) 1px,
+          transparent 2px,
+          transparent 80px
+        );
+    }
     #cc { position: absolute; inset: 0; }
     #cv { width: 100% !important; height: 100% !important; display: block; touch-action: none; cursor: grab; }
     #cv:active { cursor: grabbing; }
-    .grad-top { position: absolute; top: 0; left: 0; right: 0; height: 140px; background: linear-gradient(to bottom, var(--bg), transparent); pointer-events: none; z-index: 2; }
-    .grad-bot { position: absolute; bottom: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to top, var(--bg), transparent); pointer-events: none; z-index: 2; }
+    .grad-top { position: absolute; top: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to bottom, var(--bg) 0%, rgba(26,22,19,0.8) 60%, transparent 100%); pointer-events: none; z-index: 2; }
+    .grad-bot { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, var(--bg) 0%, rgba(26,22,19,0.85) 50%, transparent 100%); pointer-events: none; z-index: 2; }
 
-    /* PROJECT INFO */
-    .pinfo { position: absolute; z-index: 10; bottom: 72px; left: 36px; max-width: 300px; }
-    .ptag { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 8px; }
-    .ptitle { font-size: clamp(28px, 4vw, 42px); font-weight: 600; line-height: 1.1; color: var(--beige); margin-bottom: 10px; white-space: nowrap; }
-    .pdesc { font-size: 12px; color: rgba(224,220,211,0.75); line-height: 1.7; font-weight: 300; }
+    /* PROJECT INFO — jerarquía tipográfica premium */
+    .pinfo { position: absolute; z-index: 10; bottom: 72px; left: 36px; max-width: 340px; }
+    .ptag { font-size: 8px; letter-spacing: 0.55em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 14px; opacity: 0.9; }
+    .ptitle { font-size: clamp(32px, 4.5vw, 52px); font-weight: 700; line-height: 1.05; color: var(--beige); margin-bottom: 6px; white-space: nowrap; letter-spacing: -0.02em; }
+    .psubtitle { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,184,154,0.6); font-weight: 400; margin-bottom: 14px; }
+    .pdesc { font-size: 12px; color: rgba(224,220,211,0.65); line-height: 1.7; font-weight: 300; }
 
-    /* BARRA CONTROLES */
-    .cbar { position: absolute; bottom: 20px; right: 36px; z-index: 10; display: flex; gap: 4px; align-items: center; background: rgba(26,22,19,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-s); border-radius: 99px; padding: 5px 8px; }
+    /* BARRA CONTROLES — alineada con la descripción (mismo bottom que pinfo) */
+    .cbar { position: absolute; bottom: 72px; right: 36px; z-index: 10; display: flex; gap: 4px; align-items: center; background: rgba(26,22,19,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid var(--border-s); border-radius: 99px; padding: 5px 8px; }
     .cbar-sep { width: 1px; height: 16px; background: var(--border-s); margin: 0 2px; flex-shrink: 0; }
     .pb { height: 30px; display: inline-flex; align-items: center; gap: 5px; padding: 0 11px; border-radius: 99px; background: transparent; border: none; color: var(--beige-dim); font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 500; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
     .pb svg { width: 12px; height: 12px; flex-shrink: 0; }
@@ -150,6 +181,7 @@
       .pinfo { bottom: 56px; left: 0; right: 0; max-width: 100%; text-align: center; padding: 0 20px; }
       .ptag { margin-bottom: 3px; }
       .ptitle { font-size: clamp(26px, 7vw, 34px); white-space: normal; margin-bottom: 4px; }
+      .psubtitle { font-size: 9px; margin-bottom: 8px; }
       .pdesc-desktop { display: none; }
       .pdesc-mobile { display: block; font-size: 13px; }
       .cbar { bottom: 14px; left: 50%; transform: translateX(-50%); right: auto; padding: 4px 6px; gap: 2px; }
@@ -232,7 +264,8 @@
 
     <div class="pinfo">
       <div class="ptag">Proyecto exclusivo · 2025</div>
-      <h1 class="ptitle">Tu cocina, en 3D.</h1>
+      <h1 class="ptitle">Tu cocina,<br>hecha realidad.</h1>
+      <div class="psubtitle">Modelo 3D interactivo · Proyecto Barzola</div>
       <p class="pdesc pdesc-desktop">Explorá cada detalle del amoblamiento.<br>Rotá el modelo, acercate, descubrí los materiales.</p>
       <p class="pdesc pdesc-mobile">Explorá tu cocina: rotála, acercate y descubrila.</p>
     </div>
