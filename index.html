@@ -35,8 +35,8 @@
     .hdr { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 18px; height: 48px; background: rgba(26,22,19,0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: 1rem; }
     .hdr-logo svg { height: 26px; }
     .hdr-badge { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--beige); background: rgba(200,184,154,0.15); border: 1px solid rgba(200,184,154,0.3); padding: 4px 12px; border-radius: 99px; font-weight: 500; }
-    .hdr-cta { font-size: 11px; font-weight: 600; font-family: 'Poppins', sans-serif; color: var(--bg); background: var(--beige); border: none; cursor: pointer; padding: 7px 16px; border-radius: 99px; transition: opacity 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; }
-    .hdr-cta:hover { opacity: 0.82; }
+    .hdr-cta { font-size: 11px; font-weight: 600; font-family: 'Poppins', sans-serif; color: #fff; background: #25D366; border: none; cursor: pointer; padding: 7px 16px; border-radius: 99px; transition: all 0.2s; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 2px 12px rgba(37,211,102,0.3); }
+    .hdr-cta:hover { opacity: 0.88; transform: scale(1.02); }
 
     #hero { position: relative; width: 100%; height: 100vh; }
     #cc { position: absolute; inset: 0; }
@@ -127,12 +127,12 @@
     #specs { padding: 64px 20px 56px; max-width: 960px; margin: 0 auto; }
     .slabel { font-size: 9px; letter-spacing: 0.45em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 28px; }
     .sgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; background: var(--border); }
-    .scard { background: var(--bg2); padding: 24px 20px; display: flex; flex-direction: column; gap: 10px; }
-    .shdr { display: flex; align-items: center; gap: 10px; }
+    .scard { background: var(--bg2); padding: 24px 20px; display: flex; flex-direction: column; gap: 10px; align-items: center; text-align: center; }
+    .shdr { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .sico { width: 32px; height: 32px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: var(--beige-ultra); border: 1px solid var(--border); color: var(--accent); }
     .sico svg { width: 15px; height: 15px; }
-    .stitle { font-size: 11px; font-weight: 600; color: var(--beige); letter-spacing: 0.03em; line-height: 1.3; }
-    .sval { font-size: 11px; color: var(--beige-dim); font-weight: 300; line-height: 1.6; padding-left: 42px; }
+    .stitle { font-size: 11px; font-weight: 600; color: var(--beige); letter-spacing: 0.03em; line-height: 1.3; white-space: nowrap; }
+    .sval { font-size: 11px; color: var(--beige-dim); font-weight: 300; line-height: 1.6; padding-left: 0; }
 
     /* CTA FINAL — sin recuadro, minimalista */
     #cta { padding: 20px 20px 100px; max-width: 700px; margin: 0 auto; text-align: center; }
@@ -152,12 +152,12 @@
     @media (max-width: 768px) {
       .hdr-badge { display: none; }
       #hero { height: 92vh; }
-      .pinfo { bottom: 130px; left: 0; right: 0; max-width: 100%; text-align: center; padding: 0 20px; }
+      .pinfo { bottom: 56px; left: 0; right: 0; max-width: 100%; text-align: center; padding: 0 20px; }
       .ptag { margin-bottom: 3px; }
       .ptitle { font-size: clamp(26px, 7vw, 34px); white-space: normal; margin-bottom: 4px; }
       .pdesc-desktop { display: none; }
       .pdesc-mobile { display: block; font-size: 13px; }
-      .cbar { bottom: 88px; padding: 4px 6px; gap: 2px; }
+      .cbar { bottom: 14px; padding: 4px 6px; gap: 2px; }
       .pb { font-size: 9px; padding: 0 8px; height: 28px; }
       .pb .pb-label { display: inline; }
       #specs { padding: 48px 16px 40px; }
@@ -278,50 +278,50 @@
 
         <div class="scard">
           <div class="shdr">
-            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
-            <div class="stitle">Melamina Sauco<br>Blend · Faplac</div>
+            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div class="stitle">Melamina Sauco Blend · Faplac</div>
           </div>
-          <div class="sval">Tablero de alta densidad con textura madera natural y cantos ABS anti-humedad. Línea premium Blend.</div>
+          <div class="sval">Tablero de alta densidad con textura madera natural y cantos ABS anti-humedad.</div>
         </div>
 
         <div class="scard">
           <div class="shdr">
-            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg></div>
-            <div class="stitle">Herrajes Häfele<br>Línea premium</div>
+            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <div class="stitle">Herrajes Häfele Premium</div>
           </div>
-          <div class="sval">Bisagras y correderas de cierre suave. La mejor calidad del mercado en durabilidad y precisión de movimiento.</div>
+          <div class="sval">Bisagras y correderas de cierre suave. Durabilidad y precisión de movimiento.</div>
         </div>
 
         <div class="scard">
           <div class="shdr">
-            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
-            <div class="stitle">Mesada Johnson<br>Piedra premium</div>
+            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 20h20M4 20V10l8-6 8 6v10"/><rect x="9" y="14" width="6" height="6"/></svg></div>
+            <div class="stitle">Mesada Johnson Piedra Natural</div>
           </div>
-          <div class="sval">Piedra natural de la línea alta de Johnson. Terminación pulida, altísima resistencia y belleza incomparable.</div>
+          <div class="sval">Línea alta Johnson. Terminación pulida, altísima resistencia y belleza incomparable.</div>
         </div>
 
         <div class="scard">
           <div class="shdr">
-            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-            <div class="stitle">Isla central<br>con almacenamiento</div>
+            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M2 11h20M6 7V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/></svg></div>
+            <div class="stitle">Isla Central con Almacenamiento</div>
           </div>
-          <div class="sval">Isla de trabajo protagonista, con módulos internos integrados y amplia superficie de preparación.</div>
+          <div class="sval">Isla protagonista con módulos internos integrados y amplia superficie de trabajo.</div>
         </div>
 
         <div class="scard">
           <div class="shdr">
-            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-            <div class="stitle">Módulos para<br>electrodomésticos</div>
+            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="3" width="20" height="14" rx="2"/><rect x="8" y="9" width="8" height="4" rx="1"/><path d="M10 19l-2 2M14 19l2 2M6 21h12"/></svg></div>
+            <div class="stitle">Módulos para Electrodomésticos</div>
           </div>
-          <div class="sval">Espacios diseñados a medida para horno, microondas y electrodomésticos integrados al conjunto.</div>
+          <div class="sval">Espacios diseñados a medida para horno, microondas y electrodomésticos integrados.</div>
         </div>
 
         <div class="scard">
           <div class="shdr">
-            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg></div>
-            <div class="stitle">Iluminación LED<br>bajo alacena</div>
+            <div class="sico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
+            <div class="stitle">Iluminación LED bajo Alacena</div>
           </div>
-          <div class="sval">Tiras LED cálidas integradas bajo alacena. Iluminan la mesada y crean profundidad ambiental.</div>
+          <div class="sval">Tiras LED cálidas integradas. Iluminan la mesada y crean profundidad ambiental.</div>
         </div>
 
       </div>
