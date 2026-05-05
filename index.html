@@ -151,18 +151,20 @@
     .pdesc-mobile { display: none; }
     @media (max-width: 768px) {
       .hdr-badge { display: none; }
-      .pinfo { bottom: 80px; left: 20px; max-width: calc(100vw - 40px); }
+      /* Textos centrados en mobile */
+      .pinfo { bottom: 100px; left: 0; right: 0; max-width: 100%; text-align: center; padding: 0 20px; }
       .ptitle { font-size: clamp(28px, 7vw, 36px); white-space: normal; }
       .pdesc-desktop { display: none; }
       .pdesc-mobile { display: block; font-size: 13px; }
-      /* Botones visibles con texto en mobile */
-      .cbar { bottom: 14px; padding: 4px 6px; gap: 2px; }
+      /* Barra de controles más arriba para que entre en el primer pantallazo */
+      .cbar { bottom: 24px; padding: 4px 6px; gap: 2px; }
       .pb { font-size: 9px; padding: 0 8px; height: 28px; }
       .pb .pb-label { display: inline; }
       #specs { padding: 48px 16px 40px; }
       .sgrid { grid-template-columns: 1fr 1fr; }
       .scard { padding: 18px 14px; }
-      #float-cta { bottom: 16px; right: 16px; }
+      /* CTA flotante más arriba para no tapar textos */
+      #float-cta { bottom: 90px; right: 16px; }
       #cta { padding: 20px 20px 60px; }
       footer { padding: 16px 20px; }
     }
@@ -238,7 +240,7 @@
       <div class="ptag">Proyecto exclusivo · 2025</div>
       <h1 class="ptitle">Tu cocina, en 3D.</h1>
       <p class="pdesc pdesc-desktop">Explorá cada detalle del amoblamiento.<br>Rotá el modelo, acercate, descubrí los materiales.</p>
-      <p class="pdesc pdesc-mobile">Explorá tu cocina en 3D. Rotá y descubrí.</p>
+      <p class="pdesc pdesc-mobile">Explorá tu cocina: rotála, acercate y descubrila.</p>
     </div>
 
     <!-- Barra unificada centrada abajo -->
@@ -499,29 +501,26 @@ loader.load('models/kitchen.glb', (gltf) => {
 function updateFloatCta() {
   const floatCta = document.getElementById('float-cta');
   const ctaSection = document.getElementById('cta');
-  if (!floatCta || !ctaSection) return;
+  if (!floatCta || !ctaSection || !floatCtaVisible) return;
   const ctaRect = ctaSection.getBoundingClientRect();
   const windowH = window.innerHeight;
-  // Se oculta cuando el CTA final entra en el viewport
   if (ctaRect.top < windowH * 0.85) {
-    floatCta.classList.remove('show');
     floatCta.style.opacity = '0';
     floatCta.style.pointerEvents = 'none';
-  } else if (floatCtaVisible) {
-    floatCta.classList.add('show');
-    floatCta.style.opacity = '';
-    floatCta.style.pointerEvents = '';
+  } else {
+    floatCta.style.opacity = '1';
+    floatCta.style.pointerEvents = 'all';
   }
 }
 let floatCtaVisible = false;
 window.addEventListener('scroll', updateFloatCta, { passive: true });
 
-// CTA flotante aparece a los 18s
+// CTA flotante aparece a los 8s
 setTimeout(() => {
   floatCtaVisible = true;
   document.getElementById('float-cta').classList.add('show');
   updateFloatCta();
-}, 18000);
+}, 8000);
 
 }, () => {}, (err) => { console.error(err); });
 
