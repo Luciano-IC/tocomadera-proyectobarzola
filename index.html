@@ -39,46 +39,16 @@
     .hdr-cta:hover { opacity: 0.88; transform: scale(1.02); }
 
     #hero { position: relative; width: 100%; height: 100vh; }
-    /* Textura de veta de madera — sutil, cálida, sobre el fondo oscuro */
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.028;
-      background-image:
-        repeating-linear-gradient(
-          92deg,
-          transparent 0px,
-          rgba(200,184,154,0.9) 1px,
-          transparent 2px,
-          transparent 18px,
-          rgba(180,160,130,0.6) 19px,
-          transparent 20px,
-          transparent 34px,
-          rgba(200,184,154,0.4) 35px,
-          transparent 36px,
-          transparent 60px
-        ),
-        repeating-linear-gradient(
-          89deg,
-          transparent 0px,
-          rgba(200,184,154,0.3) 1px,
-          transparent 2px,
-          transparent 80px
-        );
-    }
     #cc { position: absolute; inset: 0; }
     #cv { width: 100% !important; height: 100% !important; display: block; touch-action: none; cursor: grab; }
     #cv:active { cursor: grabbing; }
-    .grad-top { position: absolute; top: 0; left: 0; right: 0; height: 160px; background: linear-gradient(to bottom, var(--bg) 0%, rgba(26,22,19,0.8) 60%, transparent 100%); pointer-events: none; z-index: 2; }
+    .grad-top { position: absolute; top: 0; left: 0; right: 0; height: 100px; background: linear-gradient(to bottom, var(--bg) 0%, rgba(26,22,19,0.6) 70%, transparent 100%); pointer-events: none; z-index: 2; }
     .grad-bot { position: absolute; bottom: 0; left: 0; right: 0; height: 200px; background: linear-gradient(to top, var(--bg) 0%, rgba(26,22,19,0.85) 50%, transparent 100%); pointer-events: none; z-index: 2; }
 
     /* PROJECT INFO — jerarquía tipográfica premium */
     .pinfo { position: absolute; z-index: 10; bottom: 72px; left: 36px; max-width: 340px; }
     .ptag { font-size: 8px; letter-spacing: 0.55em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 14px; opacity: 0.9; }
-    .ptitle { font-size: clamp(32px, 4.5vw, 52px); font-weight: 700; line-height: 1.05; color: var(--beige); margin-bottom: 6px; white-space: nowrap; letter-spacing: -0.02em; }
+    .ptitle { font-size: clamp(28px, 3vw, 38px); font-weight: 700; line-height: 1.05; color: var(--beige); margin-bottom: 6px; white-space: nowrap; letter-spacing: -0.02em; }
     .psubtitle { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,184,154,0.6); font-weight: 400; margin-bottom: 14px; }
     .pdesc { font-size: 12px; color: rgba(224,220,211,0.65); line-height: 1.7; font-weight: 300; }
 
@@ -483,7 +453,9 @@ loader.load('models/kitchen.glb', (gltf) => {
   controls.minDistance = dist * 0.25;
   controls.maxDistance = dist * 3.5;
 
-  const tgt = new THREE.Vector3(0, center3.y * 0.65, 0);
+  // Desktop: target ligeramente desplazado a la izquierda para centrar visualmente el modelo
+  const tgtX = isMobile ? 0 : -center3.x * 0.3;
+  const tgt = new THREE.Vector3(tgtX, center3.y * 0.65, 0);
   // Mobile: ángulo más frontal. Desktop: desde la derecha
   const angle = isMobile ? -Math.PI * 0.5 : -Math.PI * 0.35;
   const pos = new THREE.Vector3(
