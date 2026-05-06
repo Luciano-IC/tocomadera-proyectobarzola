@@ -49,11 +49,11 @@
       pointer-events: none;
       background:
         radial-gradient(
-          ellipse 70% 60% at 62% 48%,
-          rgba(180, 140, 80, 0.12) 0%,
-          rgba(160, 120, 60, 0.07) 35%,
-          rgba(100, 70, 30, 0.03) 60%,
-          transparent 80%
+          ellipse 85% 75% at 62% 45%,
+          rgba(200, 155, 80, 0.18) 0%,
+          rgba(170, 125, 55, 0.10) 30%,
+          rgba(120, 85, 35, 0.05) 55%,
+          transparent 75%
         );
     }
 
@@ -372,7 +372,7 @@ renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color('#1a1613');
-scene.fog = new THREE.FogExp2('#1a1613', 0.022);
+scene.fog = new THREE.FogExp2('#1a1613', 0.038);
 
 const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 300);
 
@@ -393,8 +393,8 @@ controls.enablePan = false;
 controls.rotateSpeed = 0.5; controls.zoomSpeed = 0.5;
 controls.minPolarAngle = Math.PI/6; controls.maxPolarAngle = Math.PI/2.05;
 // Limitar rotación horizontal — el cliente no puede ver la parte trasera
-controls.minAzimuthAngle = -Math.PI * 0.9;
-controls.maxAzimuthAngle =  Math.PI * 0.2;
+controls.minAzimuthAngle = -Math.PI * 0.65;
+controls.maxAzimuthAngle =  Math.PI * 0.1;
 
 // Scroll inteligente — antes de interactuar, wheel scrollea la página
 let overCanvas = false;
@@ -508,23 +508,22 @@ loader.load('models/kitchen.glb', (gltf) => {
   const fovR = camera.fov * Math.PI / 180;
   const isMobile = window.innerWidth < 768;
 
-  // Desktop: zoom para que el amoblamiento llene el canvas sin paredes
+  // Desktop: zoom para que el amoblamiento llene el canvas
   const zoomFactor = isMobile ? 1.2 : 1.05;
   const dist = (maxDim * zoomFactor) / (2 * Math.tan(fovR / 2));
 
   controls.minDistance = dist * 0.5;
   controls.maxDistance = dist * 2.5;
 
-  // Desktop: target ligeramente desplazado a la izquierda para centrar visualmente el modelo
   const tgtX = isMobile ? 0 : -center3.x * 0.3;
-  // Mobile: target Y más bajo para que el modelo baje y el techo no se corte
   const tgtY = isMobile ? center3.y * 0.85 : center3.y * 0.65;
   const tgt = new THREE.Vector3(tgtX, tgtY, 0);
-  // Mobile: ángulo más frontal. Desktop: desde la derecha
-  const angle = isMobile ? -Math.PI * 0.5 : -Math.PI * 0.35;
+
+  // Ángulo más frontal en desktop — como si el cliente estuviera parado de frente
+  const angle = isMobile ? -Math.PI * 0.5 : -Math.PI * 0.42;
   const pos = new THREE.Vector3(
     dist * Math.sin(angle),
-    tgt.y + dist * 0.38,
+    tgt.y + dist * 0.28, // más bajo — altura de ojo humano
     dist * Math.cos(angle)
   );
 
