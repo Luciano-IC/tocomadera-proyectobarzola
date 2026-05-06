@@ -371,6 +371,7 @@ renderer.toneMappingExposure = 0.9;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const scene = new THREE.Scene();
+window._scene = scene; // Exponer para debug en consola
 scene.background = new THREE.Color('#1a1613');
 scene.fog = new THREE.FogExp2('#1a1613', 0.022);
 
@@ -456,8 +457,11 @@ loader.load('models/kitchen.glb', (gltf) => {
     if (!child.isMesh) return;
     const bb = new THREE.Box3().setFromObject(child);
     const sz = bb.getSize(new THREE.Vector3());
-    // LOG TEMPORAL — ver todos los meshes
-    console.log(`MESH: "${child.name}" | sz: ${sz.x.toFixed(2)} x ${sz.y.toFixed(2)} x ${sz.z.toFixed(2)}`);
+    const mat = Array.isArray(child.material) ? child.material[0] : child.material;
+    const r = mat?.color ? Math.round(mat.color.r*255) : '?';
+    const g = mat?.color ? Math.round(mat.color.g*255) : '?';
+    const b = mat?.color ? Math.round(mat.color.b*255) : '?';
+    console.log(`MESH:"${child.name}" sz:${sz.x.toFixed(1)}x${sz.y.toFixed(1)}x${sz.z.toFixed(1)} color:rgb(${r},${g},${b})`);
     const maxSz = Math.max(sz.x, sz.y, sz.z);
     const minSz = Math.min(sz.x, sz.y, sz.z);
     const flatness = minSz / maxSz; // cercano a 0 = muy plano = pared/techo/piso
