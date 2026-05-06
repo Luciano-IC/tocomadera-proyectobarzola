@@ -456,31 +456,9 @@ loader.load('models/kitchen.glb', (gltf) => {
     if (!child.isMesh) return;
     const bb = new THREE.Box3().setFromObject(child);
     const sz = bb.getSize(new THREE.Vector3());
-    const mat = Array.isArray(child.material) ? child.material[0] : child.material;
-    const color = mat?.color ? `rgb(${Math.round(mat.color.r*255)},${Math.round(mat.color.g*255)},${Math.round(mat.color.b*255)})` : 'unknown';
-    const vis = child.visible ? 'VISIBLE' : 'HIDDEN';
-    console.log(`${vis} | "${child.name}" | ${sz.x.toFixed(2)}x${sz.y.toFixed(2)}x${sz.z.toFixed(2)} | color:${color}`);
+    // LOG TEMPORAL — ver todos los meshes
+    console.log(`MESH: "${child.name}" | sz: ${sz.x.toFixed(2)} x ${sz.y.toFixed(2)} x ${sz.z.toFixed(2)}`);
     const maxSz = Math.max(sz.x, sz.y, sz.z);
-    const minSz = Math.min(sz.x, sz.y, sz.z);
-    const flatness = minSz / maxSz;
-
-    if (/floor|ground|piso|suelo|plane|wall|pared|techo|ceiling|roof|wand/i.test(child.name)) {
-      child.visible = false; return;
-    }
-    if (flatness < 0.05 && maxSz > 2) { child.visible = false; return; }
-    if (sz.y < 0.08 && sz.x > 1.5 && sz.z > 1.5) { child.visible = false; return; }
-
-    child.castShadow = true;
-    child.receiveShadow = true;
-    const mats = Array.isArray(child.material) ? child.material : [child.material];
-    mats.forEach(m => {
-      if (m?.isMeshStandardMaterial) {
-        m.roughness = Math.max(m.roughness ?? 0.5, 0.25);
-        m.metalness = Math.min(m.metalness ?? 0, 0.35);
-        m.envMapIntensity = 0.8;
-      }
-    });
-  });
     const minSz = Math.min(sz.x, sz.y, sz.z);
     const flatness = minSz / maxSz; // cercano a 0 = muy plano = pared/techo/piso
 
