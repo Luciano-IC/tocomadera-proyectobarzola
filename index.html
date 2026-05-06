@@ -409,19 +409,39 @@ canvas.addEventListener('wheel', (e) => {
   // Si ya interactuó, OrbitControls toma el control normalmente
 }, { passive: true });
 
-// Lights
-scene.add(new THREE.AmbientLight('#c8b8a8', 0.45));
-const key = new THREE.DirectionalLight('#fff5e8', 1.6);
-key.position.set(8, 12, 8); key.castShadow = true;
-key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -0.0005;
-scene.add(key);
-const fill = new THREE.DirectionalLight('#d0e0f0', 0.25); fill.position.set(-6,6,-4); scene.add(fill);
-const rim = new THREE.DirectionalLight('#f0e0d0', 0.18); rim.position.set(-2,5,-8); scene.add(rim);
-
-const ground = new THREE.Mesh(new THREE.CircleGeometry(25,64), new THREE.ShadowMaterial({ opacity: 0.2 }));
+const ground = new THREE.Mesh(new THREE.CircleGeometry(25,64), new THREE.ShadowMaterial({ opacity: 0.35 }));
 ground.rotation.x = -Math.PI/2; ground.receiveShadow = true; scene.add(ground);
 
 let modelGroup=null, box3=null, center3=new THREE.Vector3(), initPos=null, initTgt=null;
+
+// Luces — sistema cinematográfico cálido
+// Eliminamos las luces anteriores y creamos un sistema nuevo
+scene.add(new THREE.AmbientLight('#c8b0a0', 0.35));
+
+// Luz principal cálida desde arriba-derecha
+const key = new THREE.DirectionalLight('#ffedd0', 2.2);
+key.position.set(6, 14, 8);
+key.castShadow = true;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.bias = -0.0005;
+key.shadow.camera.near = 0.1;
+key.shadow.camera.far = 100;
+scene.add(key);
+
+// Luz de relleno cálida desde abajo-izquierda — simula rebote en el piso de madera
+const fill = new THREE.DirectionalLight('#e8c080', 0.6);
+fill.position.set(-5, 2, -3);
+scene.add(fill);
+
+// Luz de acento desde atrás — separa el amoblamiento del fondo
+const rim = new THREE.DirectionalLight('#fff0e0', 0.4);
+rim.position.set(0, 8, -10);
+scene.add(rim);
+
+// Luz puntual cálida en el centro — simula la iluminación LED de la cocina
+const pointLight = new THREE.PointLight('#ffd080', 1.8, 25);
+pointLight.position.set(0, 6, 0);
+scene.add(pointLight);
 
 const loader = new GLTFLoader();
 const draco = new DRACOLoader();
@@ -436,10 +456,35 @@ loader.load('models/kitchen.glb', (gltf) => {
     if (!child.isMesh) return;
     const bb = new THREE.Box3().setFromObject(child);
     const sz = bb.getSize(new THREE.Vector3());
-    if ((sz.y < 0.05 && sz.x > 1 && sz.z > 1) || /floor|ground|piso|suelo|plane/i.test(child.name)) { child.visible = false; return; }
-    child.castShadow = true; child.receiveShadow = true;
+    const maxSz = Math.max(sz.x, sz.y, sz.z);
+    const minSz = Math.min(sz.x, sz.y, sz.z);
+    const flatness = minSz / maxSz; // cercano a 0 = muy plano = pared/techo/piso
+
+    // Ocultar por nombre
+    if (/floor|ground|piso|suelo|plane|wall|pared|techo|ceiling|roof|wand/i.test(child.name)) {
+      child.visible = false; return;
+    }
+
+    // Ocultar planos muy grandes y muy planos — paredes, techo y piso arquitectónico
+    if (flatness < 0.05 && maxSz > 2) {
+      child.visible = false; return;
+    }
+
+    // Ocultar planos horizontales grandes (piso)
+    if (sz.y < 0.08 && sz.x > 1.5 && sz.z > 1.5) {
+      child.visible = false; return;
+    }
+
+    child.castShadow = true;
+    child.receiveShadow = true;
     const mats = Array.isArray(child.material) ? child.material : [child.material];
-    mats.forEach(m => { if (m?.isMeshStandardMaterial) { m.roughness = Math.max(m.roughness??0.5, 0.2); m.metalness = Math.min(m.metalness??0, 0.4); m.envMapIntensity = 0.5; } });
+    mats.forEach(m => {
+      if (m?.isMeshStandardMaterial) {
+        m.roughness = Math.max(m.roughness ?? 0.5, 0.25);
+        m.metalness = Math.min(m.metalness ?? 0, 0.35);
+        m.envMapIntensity = 0.8;
+      }
+    });
   });
 
   // Wrapper — NO hacemos rotación introductoria para evitar descentrado visual
@@ -463,8 +508,8 @@ loader.load('models/kitchen.glb', (gltf) => {
   const fovR = camera.fov * Math.PI / 180;
   const isMobile = window.innerWidth < 768;
 
-  // Desktop: zoom agresivo para que el modelo llene el canvas
-  const zoomFactor = isMobile ? 1.2 : 0.82;
+  // Desktop: zoom para que el amoblamiento llene el canvas sin paredes
+  const zoomFactor = isMobile ? 1.2 : 1.05;
   const dist = (maxDim * zoomFactor) / (2 * Math.tan(fovR / 2));
 
   controls.minDistance = dist * 0.5;
