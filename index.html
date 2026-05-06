@@ -452,26 +452,12 @@ loader.load('models/kitchen.glb', (gltf) => {
   
   const model = gltf.scene;
 
-  // Nombres de meshes arquitectónicos a eliminar definitivamente
-  const REMOVE_MESHES = [
-    'Object720_Object720_mtl_0',
-    'Object721_Object721_mtl_0',
-    'Object722_Object722_mtl_0',
-    'Object723_Object723_mtl_0',
-    'Object724_Object724_mtl_0',
-    'Object725_Object725_mtl_0',
-  ];
-
-  const toRemove = [];
-  model.traverse(child => {
-    if (REMOVE_MESHES.includes(child.name)) toRemove.push(child);
-  });
-  toRemove.forEach(child => child.removeFromParent());
-
   model.traverse(child => {
     if (!child.isMesh) return;
     const bb = new THREE.Box3().setFromObject(child);
     const sz = bb.getSize(new THREE.Vector3());
+    // LOG TEMPORAL — ver todos los meshes
+    console.log(`MESH: "${child.name}" | sz: ${sz.x.toFixed(2)} x ${sz.y.toFixed(2)} x ${sz.z.toFixed(2)}`);
     const maxSz = Math.max(sz.x, sz.y, sz.z);
     const minSz = Math.min(sz.x, sz.y, sz.z);
     const flatness = minSz / maxSz; // cercano a 0 = muy plano = pared/techo/piso
